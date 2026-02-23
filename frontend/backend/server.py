@@ -3,6 +3,7 @@ from fastapi.staticfiles import StaticFiles
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
+import pymongo
 import os
 import logging
 from pathlib import Path
@@ -128,11 +129,23 @@ async def submit_contact_form(form_data: ContactFormCreate):
     except ValidationError as e:
         logger.warning(f"Validation error for {form_data.email if 'form_data' in locals() else 'unknown'}: {e.errors()}")
         raise HTTPException(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail=e.errors())
+    except pymongo.errors.ServerSelectionTimeoutError as e:
+        logger.exception("MongoDB connection timeout (check Atlas Network Access allows Vercel)")
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="Database temporarily unavailable. Please try again or email contact@apexnexon.tech.",
+        )
+    except pymongo.errors.OperationFailure as e:
+        logger.exception("MongoDB operation failed: %s", e)
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="Database error. Please try again or email contact@apexnexon.tech.",
+        )
     except Exception as e:
-        logger.exception("Contact form error")
+        logger.exception("Contact form error: %s", e)
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Failed to process contact form submission: {str(e)}"
+            detail="Failed to send message. Please try again or email contact@apexnexon.tech.",
         )
 
 # ----- Blog API -----
