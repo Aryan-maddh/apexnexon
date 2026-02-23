@@ -260,7 +260,7 @@ async def get_contact_submissions():
             detail="Failed to fetch contact submissions"
         )
 
-# Include the router in the main app
+# Include the router in the main app (prefix is already defined in api_router)
 app.include_router(api_router)
 
 # Serve uploaded images
@@ -273,7 +273,6 @@ app.add_middleware(
         "https://www.apexnexon.tech",
         "https://apexnexon.tech",
         "http://localhost:3000",
-        "*" 
     ],
     allow_methods=["*"],
     allow_headers=["*"],
