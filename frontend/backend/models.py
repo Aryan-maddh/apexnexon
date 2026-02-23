@@ -1,6 +1,9 @@
 from pydantic import BaseModel, EmailStr, Field
 from typing import Optional
-from datetime import datetime
+from datetime import datetime, timezone
+
+def _utc_now() -> datetime:
+    return datetime.now(timezone.utc)
 
 class ContactFormSubmission(BaseModel):
     name: str = Field(..., min_length=2, max_length=100)
@@ -8,7 +11,7 @@ class ContactFormSubmission(BaseModel):
     company: Optional[str] = Field(None, max_length=100)
     phone: Optional[str] = Field(None, max_length=20)
     message: str = Field(..., min_length=10, max_length=2000)
-    created_at: datetime = Field(default_factory=datetime.utcnow)
+    created_at: datetime = Field(default_factory=_utc_now)
 
 class ContactFormCreate(BaseModel):
     name: str

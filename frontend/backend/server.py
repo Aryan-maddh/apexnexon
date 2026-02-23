@@ -10,8 +10,8 @@ from pydantic import BaseModel, Field, ConfigDict, ValidationError
 from typing import List
 import uuid
 from datetime import datetime, timezone
-from .models import ContactFormSubmission, ContactFormCreate, BlogPost, BlogPostCreate
-from .email_service import email_service
+from backend.models import ContactFormSubmission, ContactFormCreate, BlogPost, BlogPostCreate
+from backend.email_service import email_service
 
 
 ROOT_DIR = Path(__file__).parent
@@ -26,7 +26,7 @@ logger = logging.getLogger(__name__)
 
 # MongoDB connection (one cluster, multiple databases)
 # Use getenv so the app can load on Vercel even if env vars are missing (fail at request time instead)
-mongo_url = os.environ.get('MONGO_URL')
+mongo_url = (os.environ.get('MONGO_URL') or '').strip()
 if not mongo_url:
     logger.warning('MONGO_URL not set; API will return 503 for DB operations')
 client = AsyncIOMotorClient(mongo_url) if mongo_url else None
