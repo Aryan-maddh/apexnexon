@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { usePageTitle } from '../hooks/usePageTitle';
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
 import { toast } from 'sonner';
+import PageMeta from '../components/SEO/PageMeta';
 
 const Contact = () => {
   usePageTitle('Contact');
@@ -16,10 +17,11 @@ const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
   };
 
   const handleSubmit = async (e) => {
@@ -29,28 +31,40 @@ const Contact = () => {
       toast.error('Contact form is not configured for this environment. Please email us at contact@apexnexon.tech directly.');
       return;
     }
-    setIsSubmitting(true);
 
+    if (formData.message.length < 10) {
+      toast.error('Message must be at least 10 characters long.');
+      return;
+    }
+
+    setIsSubmitting(true);
     try {
       const response = await fetch(`${BACKEND_URL}/api/contact`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(formData),
       });
 
-      if (response.ok) {
-        toast.success('Message sent successfully! We\'ll get back to you soon.');
-        setFormData({ name: '', email: '', company: '', phone: '', message: '' });
-      } else {
+      if (!response.ok) {
         const text = await response.text();
         console.warn('Contact API error', response.status, text);
         toast.error('Failed to send message. Please try again or email contact@apexnexon.tech.');
+        return;
       }
+
+      toast.success('Message sent successfully! We will get back to you soon.');
+      setFormData({
+        name: '',
+        email: '',
+        company: '',
+        phone: '',
+        message: ''
+      });
     } catch (error) {
       console.error('Contact form error:', error);
-      toast.error('Something went wrong. Please try again later.');
+      toast.error(error.message || 'Something went wrong. Please try again later.');
     } finally {
       setIsSubmitting(false);
     }
@@ -58,6 +72,10 @@ const Contact = () => {
 
   return (
     <div className="bg-black min-h-screen pt-[80px]">
+      <PageMeta
+        title="Contact Us - Let's Build Something Amazing"
+        description="Ready to transform your business with AI? Contact ApexNexon for a free consultation. We serve clients globally."
+      />
       {/* Hero */}
       <section className="py-24 relative">
         <div className="max-w-[1400px] mx-auto px-[7.6923%]">
@@ -75,7 +93,7 @@ const Contact = () => {
             >
               <span className="body-medium text-[#00FFD1]">Get in Touch</span>
             </motion.div>
-            
+
             <h1 className="display-huge mb-6">
               Let's Build Something <span style={{ color: '#00FFD1' }}>Amazing Together</span>
             </h1>
@@ -182,7 +200,7 @@ const Contact = () => {
               <div className="space-y-8 mb-12">
                 <div>
                   <h2 className="display-medium mb-8">Contact Information</h2>
-                  
+
                   <div className="space-y-6">
                     <div className="flex items-start gap-4">
                       <div className="w-12 h-12 flex items-center justify-center bg-[#00FFD1]/10 flex-shrink-0">

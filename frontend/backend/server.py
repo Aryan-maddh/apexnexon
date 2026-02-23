@@ -80,6 +80,10 @@ async def get_status_checks():
     
     return status_checks
 
+@api_router.get("/health")
+async def health_check():
+    return {"status": "ok", "message": "API is live"}
+
 @api_router.post("/contact", response_model=ContactFormSubmission, status_code=status.HTTP_201_CREATED)
 async def submit_contact_form(form_data: ContactFormCreate):
     """
@@ -115,13 +119,13 @@ async def submit_contact_form(form_data: ContactFormCreate):
     except HTTPException:
         raise
     except ValidationError as e:
-        logger.warning(f"Validation error: {e}")
+        logger.warning(f"Validation error for {form_data.email if 'form_data' in locals() else 'unknown'}: {e.errors()}")
         raise HTTPException(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail=e.errors())
     except Exception as e:
         logger.exception("Contact form error")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="Failed to process contact form submission"
+            detail=f"Failed to process contact form submission: {str(e)}"
         )
 
 # ----- Blog API -----
@@ -261,7 +265,7 @@ async def get_contact_submissions():
             detail="Failed to fetch contact submissions"
         )
 
-# Include the router in the main app
+# Include the router in the main app (prefix is already defined in api_router)
 app.include_router(api_router)
 
 # Serve uploaded images
@@ -270,7 +274,11 @@ app.mount("/uploads", StaticFiles(directory=str(UPLOAD_DIR)), name="uploads")
 app.add_middleware(
     CORSMiddleware,
     allow_credentials=True,
-    allow_origins=os.environ.get('CORS_ORIGINS', '*').split(','),
+    allow_origins=[
+        "https://www.apexnexon.tech",
+        "https://apexnexon.tech",
+        "http://localhost:3000"
+    ],
     allow_methods=["*"],
     allow_headers=["*"],
 )

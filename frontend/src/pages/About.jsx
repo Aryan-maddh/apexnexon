@@ -4,11 +4,16 @@ import { usePageTitle } from '../hooks/usePageTitle';
 import { techStackData } from '../data/mock';
 import { Target, Users, Zap, Globe, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import PageMeta from '../components/SEO/PageMeta';
 
 const About = () => {
   usePageTitle('About');
   return (
     <div className="bg-black min-h-screen pt-[80px]">
+      <PageMeta
+        title="About Us - Building the Future"
+        description="ApexNexon is on a mission to transform how businesses operate through AI and intelligent automation. Learn about our vision, mission, and values."
+      />
       {/* Hero */}
       <section className="py-24 relative">
         <div className="max-w-[1400px] mx-auto px-[7.6923%]">
@@ -26,7 +31,7 @@ const About = () => {
             >
               <span className="body-medium text-[#00FFD1]">About ApexNexon</span>
             </motion.div>
-            
+
             <h1 className="display-huge mb-6">
               Building the <span style={{ color: '#00FFD1' }}>Future of Business</span>
             </h1>
@@ -203,7 +208,7 @@ const About = () => {
             className="relative bg-white/5 backdrop-blur-sm border border-white/10 p-16 text-center overflow-hidden"
           >
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-[#00FFD1]/10 blur-[100px] pointer-events-none"></div>
-            
+
             <div className="relative z-10">
               <h2 className="display-large mb-6">Join Us on the Journey</h2>
               <p className="body-large text-white/85 mb-8 max-w-[700px] mx-auto">
