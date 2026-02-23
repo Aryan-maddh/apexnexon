@@ -1,14 +1,5 @@
 {
-  "functions": {
-    "api/**/*.py": {
-      "runtime": "python@3.12",
-      "excludeFiles": "node_modules/**|build/**|.git/**|**/__pycache__/**|**/*.pyc|**/tests/**|**/*.test.py|**/test_*.py|**/.env|public/**|src/**|*.md"
-    }
-  },
   "rewrites": [
-    {
-      "source": "/api/(.*)",
-      "destination": "/api/$1"
-    }
+    { "source": "/api/(.*)", "destination": "/api/$1" }
   ]
 }
