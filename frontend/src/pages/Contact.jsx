@@ -26,8 +26,12 @@ const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-    if (!BACKEND_URL || BACKEND_URL === 'undefined') {
+    // Always use current origin so request is same-origin (avoids preflight redirect/CORS)
+    const BACKEND_URL =
+      typeof window !== 'undefined'
+        ? window.location.origin
+        : (process.env.REACT_APP_BACKEND_URL || '');
+    if (!BACKEND_URL) {
       toast.error('Contact form is not configured for this environment. Please email us at contact@apexnexon.tech directly.');
       return;
     }
@@ -39,7 +43,7 @@ const Contact = () => {
 
     setIsSubmitting(true);
     try {
-      const response = await fetch(`${BACKEND_URL}/api/contact`, {
+      const response = await fetch('/api/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

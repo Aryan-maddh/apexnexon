@@ -42,7 +42,7 @@ const BlogNew = () => {
       setKeyCheckDone(true);
       return;
     }
-    fetch(`${url}/api/blog/verify`, {
+    fetch('/api/blog/verify', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ key: '' })
@@ -53,7 +53,7 @@ const BlogNew = () => {
           setIsAuthenticated(true);
         }
       })
-      .catch(() => {})
+      .catch(() => { })
       .finally(() => setKeyCheckDone(true));
   }, []);
 
@@ -63,7 +63,7 @@ const BlogNew = () => {
     setKeySubmitting(true);
     try {
       const url = process.env.REACT_APP_BACKEND_URL;
-      const res = await fetch(`${url}/api/blog/verify`, {
+      const res = await fetch('/api/blog/verify', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ key: keyInput.trim() })
@@ -121,7 +121,7 @@ const BlogNew = () => {
       form.append('file', file);
       const headers = {};
       if (key) headers['X-Blog-Edit-Key'] = key;
-      const res = await fetch(`${url}/api/blog/upload-image`, {
+      const res = await fetch('/api/blog/upload-image', {
         method: 'POST',
         headers,
         body: form
@@ -154,7 +154,7 @@ const BlogNew = () => {
       const url = process.env.REACT_APP_BACKEND_URL;
       const headers = { 'Content-Type': 'application/json' };
       if (editKey) headers['X-Blog-Edit-Key'] = editKey;
-      const res = await fetch(`${url}/api/blog`, {
+      const res = await fetch('/api/blog', {
         method: 'POST',
         headers,
         body: JSON.stringify(formData)
@@ -244,123 +244,123 @@ const BlogNew = () => {
                 </p>
 
                 <form onSubmit={handleSubmit} className="space-y-6">
-              <div>
-                <label className="block body-medium text-white/90 mb-2">Title *</label>
-                <input
-                  type="text"
-                  name="title"
-                  value={formData.title}
-                  onChange={handleChange}
-                  required
-                  maxLength={200}
-                  className="w-full px-6 py-4 bg-white/5 border border-white/10 text-white body-medium focus:outline-none focus:border-[#00FFD1]/50"
-                  placeholder="How AI is Transforming Business in 2025"
-                />
-              </div>
-
-              <div>
-                <label className="block body-medium text-white/90 mb-2">Excerpt *</label>
-                <textarea
-                  name="excerpt"
-                  value={formData.excerpt}
-                  onChange={handleChange}
-                  required
-                  maxLength={500}
-                  rows={3}
-                  className="w-full px-6 py-4 bg-white/5 border border-white/10 text-white body-medium focus:outline-none focus:border-[#00FFD1]/50 resize-none"
-                  placeholder="Short summary for the card (1–2 sentences)."
-                />
-              </div>
-
-              <div className="grid sm:grid-cols-2 gap-6">
-                <div>
-                  <label className="block body-medium text-white/90 mb-2">Author</label>
-                  <input
-                    type="text"
-                    name="author"
-                    value={formData.author}
-                    onChange={handleChange}
-                    maxLength={100}
-                    className="w-full px-6 py-4 bg-white/5 border border-white/10 text-white body-medium focus:outline-none focus:border-[#00FFD1]/50"
-                    placeholder="ApexNexon Team"
-                  />
-                </div>
-                <div>
-                  <label className="block body-medium text-white/90 mb-2">Category</label>
-                  <input
-                    type="text"
-                    name="category"
-                    value={formData.category}
-                    onChange={handleChange}
-                    maxLength={80}
-                    className="w-full px-6 py-4 bg-white/5 border border-white/10 text-white body-medium focus:outline-none focus:border-[#00FFD1]/50"
-                    placeholder="AI & Automation"
-                  />
-                </div>
-              </div>
-
-              <div className="grid sm:grid-cols-2 gap-6">
-                <div>
-                  <label className="block body-medium text-white/90 mb-2">Read time</label>
-                  <input
-                    type="text"
-                    name="read_time"
-                    value={formData.read_time}
-                    onChange={handleChange}
-                    maxLength={20}
-                    className="w-full px-6 py-4 bg-white/5 border border-white/10 text-white body-medium focus:outline-none focus:border-[#00FFD1]/50"
-                    placeholder="5 min read"
-                  />
-                </div>
-                <div>
-                  <label className="block body-medium text-white/90 mb-2">Image (optional, max 2MB)</label>
-                  <div className="space-y-2">
+                  <div>
+                    <label className="block body-medium text-white/90 mb-2">Title *</label>
                     <input
-                      type="file"
-                      accept="image/jpeg,image/png,image/gif,image/webp"
-                      onChange={handleImageFile}
-                      disabled={imageUploading}
-                      className="w-full text-white/80 file:mr-4 file:py-2 file:px-4 file:border-0 file:bg-[#00FFD1]/20 file:text-[#00FFD1] file:cursor-pointer"
-                    />
-                    <input
-                      type="url"
-                      name="image"
-                      value={formData.image}
+                      type="text"
+                      name="title"
+                      value={formData.title}
                       onChange={handleChange}
-                      className="w-full px-6 py-3 bg-white/5 border border-white/10 text-white body-small focus:outline-none focus:border-[#00FFD1]/50"
-                      placeholder="Or paste image URL"
+                      required
+                      maxLength={200}
+                      className="w-full px-6 py-4 bg-white/5 border border-white/10 text-white body-medium focus:outline-none focus:border-[#00FFD1]/50"
+                      placeholder="How AI is Transforming Business in 2025"
                     />
-                    {imageUploading && <span className="text-sm text-white/50">Uploading…</span>}
                   </div>
-                </div>
-              </div>
 
-              <div>
-                <label className="block body-medium text-white/90 mb-2">Full content (optional)</label>
-                <textarea
-                  name="content"
-                  value={formData.content}
-                  onChange={handleChange}
-                  rows={8}
-                  className="w-full px-6 py-4 bg-white/5 border border-white/10 text-white body-medium focus:outline-none focus:border-[#00FFD1]/50 resize-none"
-                  placeholder="Full post body. You can use plain text or HTML later."
-                />
-              </div>
+                  <div>
+                    <label className="block body-medium text-white/90 mb-2">Excerpt *</label>
+                    <textarea
+                      name="excerpt"
+                      value={formData.excerpt}
+                      onChange={handleChange}
+                      required
+                      maxLength={500}
+                      rows={3}
+                      className="w-full px-6 py-4 bg-white/5 border border-white/10 text-white body-medium focus:outline-none focus:border-[#00FFD1]/50 resize-none"
+                      placeholder="Short summary for the card (1–2 sentences)."
+                    />
+                  </div>
 
-              <div className="flex gap-4 pt-4">
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {isSubmitting ? 'Publishing…' : 'Publish post'}
-                  <Send size={20} />
-                </button>
-                <Link to="/blog" className="btn-secondary">
-                  Cancel
-                </Link>
-              </div>
-            </form>
+                  <div className="grid sm:grid-cols-2 gap-6">
+                    <div>
+                      <label className="block body-medium text-white/90 mb-2">Author</label>
+                      <input
+                        type="text"
+                        name="author"
+                        value={formData.author}
+                        onChange={handleChange}
+                        maxLength={100}
+                        className="w-full px-6 py-4 bg-white/5 border border-white/10 text-white body-medium focus:outline-none focus:border-[#00FFD1]/50"
+                        placeholder="ApexNexon Team"
+                      />
+                    </div>
+                    <div>
+                      <label className="block body-medium text-white/90 mb-2">Category</label>
+                      <input
+                        type="text"
+                        name="category"
+                        value={formData.category}
+                        onChange={handleChange}
+                        maxLength={80}
+                        className="w-full px-6 py-4 bg-white/5 border border-white/10 text-white body-medium focus:outline-none focus:border-[#00FFD1]/50"
+                        placeholder="AI & Automation"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid sm:grid-cols-2 gap-6">
+                    <div>
+                      <label className="block body-medium text-white/90 mb-2">Read time</label>
+                      <input
+                        type="text"
+                        name="read_time"
+                        value={formData.read_time}
+                        onChange={handleChange}
+                        maxLength={20}
+                        className="w-full px-6 py-4 bg-white/5 border border-white/10 text-white body-medium focus:outline-none focus:border-[#00FFD1]/50"
+                        placeholder="5 min read"
+                      />
+                    </div>
+                    <div>
+                      <label className="block body-medium text-white/90 mb-2">Image (optional, max 2MB)</label>
+                      <div className="space-y-2">
+                        <input
+                          type="file"
+                          accept="image/jpeg,image/png,image/gif,image/webp"
+                          onChange={handleImageFile}
+                          disabled={imageUploading}
+                          className="w-full text-white/80 file:mr-4 file:py-2 file:px-4 file:border-0 file:bg-[#00FFD1]/20 file:text-[#00FFD1] file:cursor-pointer"
+                        />
+                        <input
+                          type="url"
+                          name="image"
+                          value={formData.image}
+                          onChange={handleChange}
+                          className="w-full px-6 py-3 bg-white/5 border border-white/10 text-white body-small focus:outline-none focus:border-[#00FFD1]/50"
+                          placeholder="Or paste image URL"
+                        />
+                        {imageUploading && <span className="text-sm text-white/50">Uploading…</span>}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block body-medium text-white/90 mb-2">Full content (optional)</label>
+                    <textarea
+                      name="content"
+                      value={formData.content}
+                      onChange={handleChange}
+                      rows={8}
+                      className="w-full px-6 py-4 bg-white/5 border border-white/10 text-white body-medium focus:outline-none focus:border-[#00FFD1]/50 resize-none"
+                      placeholder="Full post body. You can use plain text or HTML later."
+                    />
+                  </div>
+
+                  <div className="flex gap-4 pt-4">
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      {isSubmitting ? 'Publishing…' : 'Publish post'}
+                      <Send size={20} />
+                    </button>
+                    <Link to="/blog" className="btn-secondary">
+                      Cancel
+                    </Link>
+                  </div>
+                </form>
               </>
             )}
           </motion.div>

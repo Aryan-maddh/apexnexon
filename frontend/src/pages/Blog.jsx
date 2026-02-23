@@ -16,7 +16,7 @@ function DeletePostButton({ postId, setPosts, posts }) {
       const key = sessionStorage.getItem('blog_edit_key');
       const headers = {};
       if (key) headers['X-Blog-Edit-Key'] = key;
-      const res = await fetch(`${url}/api/blog/${postId}`, { method: 'DELETE', headers });
+      const res = await fetch(`/api/blog/${postId}`, { method: 'DELETE', headers });
       if (res.status === 401) {
         sessionStorage.removeItem('blog_edit_key');
         toast.error('Session expired. Log in again at Write a post.');
@@ -65,7 +65,7 @@ const Blog = () => {
       setLoading(false);
       return;
     }
-    fetch(`${url}/api/blog`)
+    fetch('/api/blog')
       .then((res) => res.ok ? res.json() : [])
       .then((data) => {
         const apiPosts = Array.isArray(data)

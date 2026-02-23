@@ -1,8 +1,14 @@
 {
-  "rewrites": [{ "source": "/api/(.*)", "destination": "/api/$1" }],
   "functions": {
     "api/**/*.py": {
+      "runtime": "@vercel/python",
       "excludeFiles": "node_modules/**|build/**|.git/**|**/__pycache__/**|**/*.pyc|**/tests/**|**/*.test.py|**/test_*.py|**/.env|public/**|src/**|*.md"
     }
-  }
+  },
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "api/index.py"
+    }
+  ]
 }
