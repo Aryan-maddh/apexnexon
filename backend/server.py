@@ -80,6 +80,10 @@ async def get_status_checks():
     
     return status_checks
 
+@api_router.get("/health")
+async def health_check():
+    return {"status": "ok", "message": "API is live"}
+
 @api_router.post("/contact", response_model=ContactFormSubmission, status_code=status.HTTP_201_CREATED)
 async def submit_contact_form(form_data: ContactFormCreate):
     """
