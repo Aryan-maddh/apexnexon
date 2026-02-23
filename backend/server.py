@@ -272,7 +272,7 @@ app.add_middleware(
     allow_origins=[
         "https://www.apexnexon.tech",
         "https://apexnexon.tech",
-        "http://localhost:3000",
+        "http://localhost:3000"
     ],
     allow_methods=["*"],
     allow_headers=["*"],
