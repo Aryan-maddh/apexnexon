@@ -269,7 +269,12 @@ app.mount("/uploads", StaticFiles(directory=str(UPLOAD_DIR)), name="uploads")
 app.add_middleware(
     CORSMiddleware,
     allow_credentials=True,
-    allow_origins=[origin.strip() for origin in os.environ.get('CORS_ORIGINS', '*').split(',') if origin.strip()],
+    allow_origins=[
+        "https://www.apexnexon.tech",
+        "https://apexnexon.tech",
+        "http://localhost:3000",
+        "*" 
+    ],
     allow_methods=["*"],
     allow_headers=["*"],
 )

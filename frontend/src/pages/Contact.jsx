@@ -34,7 +34,12 @@ const Contact = () => {
 
     setIsSubmitting(true);
     try {
-      const backendUrl = process.env.REACT_APP_BACKEND_URL || '';
+      const rawBackendUrl = process.env.REACT_APP_BACKEND_URL || '';
+      // If it's the specific broken URL or empty, use same-origin relative path
+      const backendUrl = (rawBackendUrl.includes('apexnexon-api.vercel.app') || !rawBackendUrl)
+        ? ''
+        : rawBackendUrl;
+
       const response = await fetch(`${backendUrl}/api/contact`, {
         method: 'POST',
         headers: {

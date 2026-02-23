@@ -7,3 +7,6 @@ root_dir = os.path.dirname(current_dir)
 sys.path.append(root_dir)
 
 from backend.server import app
+
+# Export for Vercel
+app = app
