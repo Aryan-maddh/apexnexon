@@ -5,11 +5,16 @@ import ServiceCard from '../components/ServiceCard';
 import { servicesData } from '../data/mock';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import PageMeta from '../components/SEO/PageMeta';
 
 const Services = () => {
   usePageTitle('Services');
   return (
     <div className="bg-black min-h-screen pt-[80px]">
+      <PageMeta
+        title="Our Services - AI & Custom Software"
+        description="Explore our comprehensive technology solutions including AI, OCR, RPA, and custom software development designed for enterprise scale."
+      />
       {/* Hero */}
       <section className="py-24 relative">
         <div className="max-w-[1400px] mx-auto px-[7.6923%]">
@@ -27,7 +32,7 @@ const Services = () => {
             >
               <span className="body-medium text-[#00FFD1]">Our Services</span>
             </motion.div>
-            
+
             <h1 className="display-huge mb-6">
               Comprehensive <span style={{ color: '#00FFD1' }}>Technology Solutions</span>
             </h1>
@@ -83,7 +88,7 @@ const Services = () => {
                 <div className="text-6xl font-bold text-[#00FFD1]/20 mb-4">{process.step}</div>
                 <h3 className="heading-2 mb-3 text-[#00FFD1]">{process.title}</h3>
                 <p className="body-medium text-white/85">{process.description}</p>
-                
+
                 {/* Connector Line */}
                 {index < 3 && (
                   <div className="hidden md:block absolute top-12 left-full w-full h-[2px] bg-gradient-to-r from-[#00FFD1]/50 to-transparent"></div>
@@ -105,7 +110,7 @@ const Services = () => {
             className="relative bg-white/5 backdrop-blur-sm border border-white/10 p-16 text-center overflow-hidden"
           >
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-[#00FFD1]/10 blur-[100px] pointer-events-none"></div>
-            
+
             <div className="relative z-10">
               <h2 className="display-large mb-6">Let's Build Something Amazing</h2>
               <p className="body-large text-white/85 mb-8 max-w-[700px] mx-auto">

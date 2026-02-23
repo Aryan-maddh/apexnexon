@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { 
+import {
   Brain, FileText, Code, Smartphone, Zap, Layers, Cloud, Store, Globe,
   ArrowRight
 } from 'lucide-react';
@@ -30,7 +30,8 @@ const ServiceCard = ({ service, index }) => {
       className="group relative bg-white/5 backdrop-blur-sm border border-white/10 p-8 hover:bg-white/10 transition-all duration-400 overflow-hidden"
     >
       {/* Hover Glow Effect */}
-      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none">
+      {/* Hover Glow Effect - Hidden on mobile for performance */}
+      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none hidden lg:block">
         <div className="absolute top-0 left-0 w-32 h-32 bg-[#00FFD1]/20 blur-3xl"></div>
       </div>
 

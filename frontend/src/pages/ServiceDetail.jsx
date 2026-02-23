@@ -54,10 +54,14 @@ function getServiceDetail(service) {
   return { longDescription, benefits, outcomes, approach };
 }
 
+import { ServiceSchema } from '../components/SEO/SchemaOrg';
+import PageMeta from '../components/SEO/PageMeta';
+
 const ServiceDetail = () => {
   const { id } = useParams();
   const service = servicesData.find((s) => String(s.id) === id);
 
+  // Provide a safe default for title hook, though we handle !service below
   usePageTitle(service ? service.title : 'Service');
 
   if (!service) {
@@ -89,6 +93,15 @@ const ServiceDetail = () => {
 
   return (
     <div className="min-h-screen pt-[80px] relative bg-[#050508]">
+      <PageMeta
+        title={service.title}
+        description={longDescription.substring(0, 160) + '...'}
+      />
+      <ServiceSchema
+        name={service.title}
+        description={longDescription}
+        url={window.location.href}
+      />
       {/* Page-level gradient for depth */}
       <div className="fixed inset-0 pointer-events-none z-0" aria-hidden="true">
         <div className="absolute inset-0 bg-gradient-to-b from-black via-[#08080c] to-black opacity-90" />
@@ -178,7 +191,8 @@ const ServiceDetail = () => {
       {/* What we deliver — features in large cards */}
       <section className="py-20 sm:py-24 lg:py-28 relative z-10">
         <div className="absolute inset-0 bg-white/[0.015]" aria-hidden="true" />
-        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: `repeating-linear-gradient(0deg, transparent, transparent 80px, rgba(255,255,255,0.02) 80px, rgba(255,255,255,0.02) 81px),
+        <div className="absolute inset-0 opacity-[0.03]" style={{
+          backgroundImage: `repeating-linear-gradient(0deg, transparent, transparent 80px, rgba(255,255,255,0.02) 80px, rgba(255,255,255,0.02) 81px),
           repeating-linear-gradient(-90deg, transparent, transparent 80px, rgba(255,255,255,0.02) 80px, rgba(255,255,255,0.02) 81px)` }} aria-hidden="true" />
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-[7.6923%] relative z-10">
           <motion.h2

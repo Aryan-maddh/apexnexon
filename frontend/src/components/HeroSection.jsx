@@ -1,15 +1,26 @@
-import React from 'react';
-import Spline from '@splinetool/react-spline';
+import React, { Suspense, useState, useEffect } from 'react';
+// import Spline from '@splinetool/react-spline'; // Removed static import
 import { motion } from 'framer-motion';
 import { ArrowRight, PlayCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
+const Spline = React.lazy(() => import('@splinetool/react-spline'));
+
 const HeroSection = () => {
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    const checkIsDesktop = () => setIsDesktop(window.innerWidth >= 1024);
+    checkIsDesktop();
+    window.addEventListener('resize', checkIsDesktop);
+    return () => window.removeEventListener('resize', checkIsDesktop);
+  }, []);
+
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden bg-black pt-20">
-      {/* Background Pattern */}
+      {/* ... (keep existing background pattern) ... */}
       <div className="absolute inset-0 opacity-[0.07]">
-        <div 
+        <div
           className="w-full h-full"
           style={{
             backgroundImage: `
@@ -30,6 +41,7 @@ const HeroSection = () => {
             transition={{ duration: 0.8 }}
             className="order-2 lg:order-1"
           >
+            {/* ... (keep existing content up to buttons) ... */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -96,7 +108,7 @@ const HeroSection = () => {
             </motion.div>
           </motion.div>
 
-          {/* Right Side - Spline Animation: larger area + responsive scaling so ball isn't cut */}
+          {/* Right Side - Spline Animation */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -107,9 +119,17 @@ const HeroSection = () => {
               className="w-full h-full relative flex items-center justify-center"
               style={{ overflow: 'visible' }}
             >
-              {/* Mobile only: scale down so full ball fits; desktop unchanged */}
               <div className="hero-spline-wrap w-full h-full origin-center scale-[0.62] sm:scale-85 md:scale-95 lg:scale-100">
-                <Spline scene="https://prod.spline.design/NbVmy6DPLhY-5Lvg/scene.splinecode" />
+                {isDesktop ? (
+                  <Suspense fallback={<div className="animate-pulse bg-white/5 w-full h-full rounded-full" />}>
+                    <Spline scene="https://prod.spline.design/NbVmy6DPLhY-5Lvg/scene.splinecode" />
+                  </Suspense>
+                ) : (
+                  /* Mobile Fallback */
+                  <div className="w-full h-full flex items-center justify-center">
+                    <div className="w-64 h-64 bg-gradient-to-tr from-[#00FFD1]/20 to-purple-500/20 rounded-full blur-3xl opacity-50" />
+                  </div>
+                )}
               </div>
             </div>
           </motion.div>

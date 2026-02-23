@@ -5,10 +5,12 @@ import HeroSection from '../components/HeroSection';
 import ServiceCard from '../components/ServiceCard';
 import TestimonialCard from '../components/TestimonialCard';
 import { servicesData, testimonialsData, whyChooseUsData, industriesData } from '../data/mock';
-import { 
-  ShieldCheck, Cpu, Rocket, Layers, TrendingUp, Headphones, ArrowRight 
+import {
+  ShieldCheck, Cpu, Rocket, Layers, TrendingUp, Headphones, ArrowRight
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { OrganizationSchema } from '../components/SEO/SchemaOrg';
+import PageMeta from '../components/SEO/PageMeta';
 
 const iconMap = {
   'shield-check': ShieldCheck,
@@ -23,6 +25,11 @@ const Home = () => {
   usePageTitle('AI & Automation Solutions');
   return (
     <div className="bg-black">
+      <PageMeta
+        title="AI & Automation Solutions"
+        description="ApexNexon transforms businesses with enterprise-grade AI, OCR, RPA, and custom software solutions. Where Intelligence Meets Automation."
+      />
+      <OrganizationSchema />
       {/* Hero Section */}
       <HeroSection />
 
@@ -218,7 +225,7 @@ const Home = () => {
           >
             {/* Background Glow */}
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-[#00FFD1]/10 blur-[100px] pointer-events-none"></div>
-            
+
             <div className="relative z-10">
               <h2 className="display-large mb-6">Ready to Transform Your Business?</h2>
               <p className="body-large text-white/85 mb-8 max-w-[700px] mx-auto">

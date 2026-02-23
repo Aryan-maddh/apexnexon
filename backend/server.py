@@ -115,13 +115,13 @@ async def submit_contact_form(form_data: ContactFormCreate):
     except HTTPException:
         raise
     except ValidationError as e:
-        logger.warning(f"Validation error: {e}")
+        logger.warning(f"Validation error for {form_data.email if 'form_data' in locals() else 'unknown'}: {e.errors()}")
         raise HTTPException(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail=e.errors())
     except Exception as e:
         logger.exception("Contact form error")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="Failed to process contact form submission"
+            detail=f"Failed to process contact form submission: {str(e)}"
         )
 
 # ----- Blog API -----
@@ -269,7 +269,7 @@ app.mount("/uploads", StaticFiles(directory=str(UPLOAD_DIR)), name="uploads")
 app.add_middleware(
     CORSMiddleware,
     allow_credentials=True,
-    allow_origins=os.environ.get('CORS_ORIGINS', '*').split(','),
+    allow_origins=[origin.strip() for origin in os.environ.get('CORS_ORIGINS', '*').split(',') if origin.strip()],
     allow_methods=["*"],
     allow_headers=["*"],
 )

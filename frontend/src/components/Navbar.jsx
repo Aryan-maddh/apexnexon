@@ -8,10 +8,18 @@ const Navbar = () => {
   const location = useLocation();
 
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const scrolled = window.scrollY > 20;
+          setIsScrolled(prev => (prev !== scrolled ? scrolled : prev));
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -33,7 +41,7 @@ const Navbar = () => {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 border-b border-white/10 transition-all duration-300 ${isScrolled ? 'backdrop-blur-xl bg-black/95' : 'bg-black'}`}>
+    <nav className={`fixed top-0 left-0 right-0 z-50 border-b border-white/10 transition-all duration-300 ${isScrolled ? 'backdrop-blur-md lg:backdrop-blur-xl bg-black/95' : 'bg-black'}`}>
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-[7.6923%] flex items-center justify-between h-20">
         <Link to="/" className="flex items-center gap-2 z-50">
           <div className="text-xl sm:text-2xl font-bold" style={{ color: '#00FFD1' }}>ApexNexon</div>
@@ -45,11 +53,10 @@ const Navbar = () => {
             <Link
               key={link.path}
               to={link.path}
-              className={`text-base font-medium transition-colors duration-300 ${
-                isActive(link.path) 
-                  ? 'text-[#00FFD1]' 
-                  : 'text-white/60 hover:text-white'
-              }`}
+              className={`text-base font-medium transition-colors duration-300 ${isActive(link.path)
+                ? 'text-[#00FFD1]'
+                : 'text-white/60 hover:text-white'
+                }`}
             >
               {link.name}
             </Link>
@@ -77,11 +84,11 @@ const Navbar = () => {
       {isMobileMenuOpen && (
         <>
           {/* Backdrop */}
-          <div 
+          <div
             className="lg:hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-40"
             onClick={() => setIsMobileMenuOpen(false)}
           />
-          
+
           {/* Menu Content */}
           <div className="lg:hidden fixed top-20 left-0 right-0 bg-black border-b border-white/10 z-40 max-h-[calc(100vh-80px)] overflow-y-auto">
             <div className="flex flex-col px-6 py-8 gap-6">
@@ -89,11 +96,10 @@ const Navbar = () => {
                 <Link
                   key={link.path}
                   to={link.path}
-                  className={`text-xl font-medium py-3 transition-colors duration-300 ${
-                    isActive(link.path) 
-                      ? 'text-[#00FFD1]' 
-                      : 'text-white/80 hover:text-white'
-                  }`}
+                  className={`text-xl font-medium py-3 transition-colors duration-300 ${isActive(link.path)
+                    ? 'text-[#00FFD1]'
+                    : 'text-white/80 hover:text-white'
+                    }`}
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {link.name}
