@@ -24,11 +24,14 @@ const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+    if (!BACKEND_URL || BACKEND_URL === 'undefined') {
+      toast.error('Contact form is not configured for this environment. Please email us at contact@apexnexon.tech directly.');
+      return;
+    }
     setIsSubmitting(true);
 
     try {
-      // This will be connected to backend API later
-      const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
       const response = await fetch(`${BACKEND_URL}/api/contact`, {
         method: 'POST',
         headers: {
@@ -41,7 +44,9 @@ const Contact = () => {
         toast.success('Message sent successfully! We\'ll get back to you soon.');
         setFormData({ name: '', email: '', company: '', phone: '', message: '' });
       } else {
-        toast.error('Failed to send message. Please try again.');
+        const text = await response.text();
+        console.warn('Contact API error', response.status, text);
+        toast.error('Failed to send message. Please try again or email contact@apexnexon.tech.');
       }
     } catch (error) {
       console.error('Contact form error:', error);

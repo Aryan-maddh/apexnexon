@@ -126,8 +126,9 @@ async def submit_contact_form(form_data: ContactFormCreate):
 
 # ----- Blog API -----
 BLOG_EDIT_KEY = os.environ.get("BLOG_EDIT_KEY", "").strip()
-UPLOAD_DIR = ROOT_DIR / "uploads"
-UPLOAD_DIR.mkdir(exist_ok=True)
+# On Vercel use /tmp (writable); files won't persist between invocations
+UPLOAD_DIR = Path("/tmp/uploads") if os.environ.get("VERCEL") else (ROOT_DIR / "uploads")
+UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 MAX_IMAGE_SIZE = 2 * 1024 * 1024  # 2MB
 ALLOWED_IMAGE_TYPES = {"image/jpeg", "image/png", "image/gif", "image/webp"}
 
