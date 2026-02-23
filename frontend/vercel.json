@@ -1,5 +1,8 @@
 {
-  "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api" }
-  ]
+  "rewrites": [{ "source": "/api/(.*)", "destination": "/api" }],
+  "functions": {
+    "api/**/*.py": {
+      "excludeFiles": "node_modules/**|build/**|.git/**|**/__pycache__/**|**/*.pyc|**/tests/**|**/*.test.py|**/test_*.py|**/.env|public/**|src/**|*.md"
+    }
+  }
 }
