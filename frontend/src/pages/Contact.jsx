@@ -52,7 +52,12 @@ const Contact = () => {
       });
 
       if (!response.ok) {
-        const text = await response.text();
+        let text = '';
+        try {
+          text = await response.text();
+        } catch {
+          text = response.statusText || 'Unknown error';
+        }
         console.warn('Contact API error', response.status, text);
         toast.error('Failed to send message. Please try again or email contact@apexnexon.tech.');
         return;
