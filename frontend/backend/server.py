@@ -93,7 +93,7 @@ async def submit_contact_form(form_data: ContactFormCreate):
     - Store in database
     - Send email notification
     """
-    if not db_contact:
+    if db_contact is None:
         raise HTTPException(
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
             detail="Database not configured (MONGO_URL missing). Check server environment variables.",
