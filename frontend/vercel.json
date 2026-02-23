@@ -1,14 +1,14 @@
 {
   "functions": {
     "api/**/*.py": {
-      "runtime": "@vercel/python",
+      "runtime": "python@3.12",
       "excludeFiles": "node_modules/**|build/**|.git/**|**/__pycache__/**|**/*.pyc|**/tests/**|**/*.test.py|**/test_*.py|**/.env|public/**|src/**|*.md"
     }
   },
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "api/index.py"
+      "destination": "/api/$1"
     }
   ]
 }
