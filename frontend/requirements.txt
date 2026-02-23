@@ -1,8 +1,8 @@
 # Used by Vercel for API serverless (keep under 250MB). Full deps in backend/requirements.txt for local dev.
 fastapi==0.110.1
-motor==3.3.1
+motor>=3.6.0
 pydantic>=2.6.4
 email-validator>=2.2.0
 python-dotenv>=1.0.1
 python-multipart>=0.0.9
-pymongo==4.5.0
+pymongo>=4.9.0
