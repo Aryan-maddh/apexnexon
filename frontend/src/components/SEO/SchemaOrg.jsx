@@ -1,23 +1,24 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
+import { brandEntity } from '../../data/brandEntity';
 
 export const OrganizationSchema = () => {
   const schema = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "name": "ApexNexon",
-    "url": "https://apexnexon.tech",
-    "logo": "https://apexnexon.tech/favicon.svg",
+    "name": brandEntity.name,
+    "url": brandEntity.url,
+    "logo": "https://apexnexon.tech/logo.png",
+    "description": brandEntity.definition,
+    "slogan": brandEntity.tagline,
+    "knowsAbout": brandEntity.supportingTopics,
     "contactPoint": {
       "@type": "ContactPoint",
-      "email": "contact@apexnexon.tech",
-      "contactType": "customer service"
+      "email": brandEntity.contactEmail,
+      "contactType": "customer service",
+      "url": brandEntity.url
     },
-    "sameAs": [
-      "https://www.linkedin.com/company/apexnexon",
-      "https://twitter.com/apexnexon",
-      "https://github.com/apexnexon"
-    ]
+    "sameAs": brandEntity.sameAs
   };
 
   return (
@@ -34,7 +35,8 @@ export const ServiceSchema = ({ name, description, url }) => {
     "serviceType": name,
     "provider": {
       "@type": "Organization",
-      "name": "ApexNexon"
+      "name": brandEntity.name,
+      "url": brandEntity.url
     },
     "description": description,
     "url": url
@@ -59,10 +61,11 @@ export const BlogPostSchema = ({ title, description, datePublished, author, imag
     },
     "publisher": {
       "@type": "Organization",
-      "name": "ApexNexon",
+      "name": brandEntity.name,
+      "url": brandEntity.url,
       "logo": {
         "@type": "ImageObject",
-        "url": "https://apexnexon.tech/favicon.svg"
+        "url": "https://apexnexon.tech/logo.png"
       }
     },
     "datePublished": datePublished,

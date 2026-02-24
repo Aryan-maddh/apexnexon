@@ -11,6 +11,7 @@ import {
 import { Link } from 'react-router-dom';
 import { OrganizationSchema } from '../components/SEO/SchemaOrg';
 import PageMeta from '../components/SEO/PageMeta';
+import { brandEntity } from '../data/brandEntity';
 
 const iconMap = {
   'shield-check': ShieldCheck,
@@ -27,7 +28,7 @@ const Home = () => {
     <div className="bg-black">
       <PageMeta
         title="AI & Automation Solutions"
-        description="ApexNexon transforms businesses with enterprise-grade AI, OCR, RPA, and custom software solutions. Where Intelligence Meets Automation."
+        description={brandEntity.metaDescription}
       />
       <OrganizationSchema />
       {/* Hero Section */}
