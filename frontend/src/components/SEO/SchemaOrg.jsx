@@ -1,6 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { brandEntity } from '../../data/brandEntity';
+import { brandFaq } from '../../data/brandFaq';
 
 export const OrganizationSchema = () => {
   const schema = {
@@ -72,6 +73,27 @@ export const BlogPostSchema = ({ title, description, datePublished, author, imag
     "description": description
   };
 
+  return (
+    <Helmet>
+      <script type="application/ld+json">{JSON.stringify(schema)}</script>
+    </Helmet>
+  );
+};
+
+/** FAQPage schema. Must match visible FAQ content exactly. */
+export const FAQPageSchema = () => {
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: brandFaq.map(({ question, answer }) => ({
+      '@type': 'Question',
+      name: question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: answer,
+      },
+    })),
+  };
   return (
     <Helmet>
       <script type="application/ld+json">{JSON.stringify(schema)}</script>

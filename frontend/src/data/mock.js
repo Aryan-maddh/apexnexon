@@ -195,6 +195,28 @@ export const caseStudiesData = [
     results: ["Order fulfillment time -60%", "Inventory accuracy 99.8%", "Labor costs reduced 35%", "Capacity increased 40%"],
     technologies: ["React", "FastAPI", "IoT", "Computer Vision", "MongoDB"],
     image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&q=80"
+  },
+  {
+    id: 7,
+    title: "Document and Invoice Automation for Healthcare Billing",
+    client: "Regional Healthcare Provider (anonymized)",
+    industry: "Healthcare",
+    problem: "Staff spent 40+ hours per week manually keying invoices and EOBs into the billing system; error rate 12%; audit risk and delayed reimbursements.",
+    solution: "ApexNexon built a custom OCR and validation pipeline that extracts data from invoices and EOBs, checks against patient records, and feeds the billing system. HIPAA-compliant deployment with human-in-the-loop for exceptions.",
+    results: ["Manual processing time reduced by 85%", "Error rate below 2%", "ROI in 5 months", "Deployed across 8 facilities"],
+    technologies: ["Python", "OCR", "FastAPI", "PostgreSQL", "AWS"],
+    image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&q=80"
+  },
+  {
+    id: 8,
+    title: "RPA and Document Extraction for Finance Operations",
+    client: "Mid-Market Financial Services Firm (anonymized)",
+    industry: "Finance",
+    problem: "KYC and onboarding relied on manual document checks and data entry; 3–5 day turnaround and high drop-off; compliance gaps.",
+    solution: "ApexNexon implemented automated document capture, AI-based verification and risk scoring, and RPA workflows to update core systems. Built for audit trail and regulatory alignment.",
+    results: ["Onboarding time 3 days → under 1 hour", "Drop-off reduced by 60%", "100% audit-ready documentation", "ROI in 4 months"],
+    technologies: ["Python", "Computer Vision", "RPA", "FastAPI", "PostgreSQL"],
+    image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&q=80"
   }
 ];
 

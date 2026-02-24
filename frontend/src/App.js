@@ -18,6 +18,7 @@ const BlogNew = lazy(() => import("./pages/BlogNew"));
 const Contact = lazy(() => import("./pages/Contact"));
 const Privacy = lazy(() => import("./pages/Privacy"));
 const Terms = lazy(() => import("./pages/Terms"));
+const Faq = lazy(() => import("./pages/Faq"));
 
 // Loading fallback
 const PageLoader = () => (
@@ -58,6 +59,7 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/terms" element={<Terms />} />
+            <Route path="/faq" element={<Faq />} />
           </Routes>
         </Suspense>
         <Footer />
