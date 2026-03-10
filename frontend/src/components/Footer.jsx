@@ -2,13 +2,15 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Linkedin, Twitter, Github } from 'lucide-react';
+import { servicesData } from '../data/mock';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const footerServices = servicesData.slice(0, 6);
 
   return (
-    <footer className="bg-black border-t border-white/10 pt-16 pb-8">
-      <div className="max-w-[1400px] mx-auto px-[7.6923%]">
+    <footer className="relative z-10 bg-black border-t border-white/10 pt-16 pb-8 overflow-visible">
+      <div className="max-w-[1400px] mx-auto px-[7.6923%] relative z-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           {/* Company Info */}
           <div>
@@ -26,12 +28,12 @@ const Footer = () => {
                   maskPosition: 'center',
                 }}
                 initial={{ opacity: 0, scale: 0.92 }}
-                whileInView={{ opacity: 1, scale: [1, 1.04, 1] }}
+                whileInView={{ opacity: 1, scale: [1, 1.08, 1] }}
                 viewport={{ once: true, margin: '-50px' }}
                 transition={{
                   opacity: { duration: 0.5, ease: 'easeOut' },
                   scale: {
-                    duration: 2.5,
+                    duration: 2,
                     repeat: Infinity,
                     ease: 'easeInOut',
                   },
@@ -57,27 +59,32 @@ const Footer = () => {
           </div>
 
           {/* Quick Links */}
-          <div>
+          <div className="relative z-20">
             <h3 className="heading-3 mb-4">Quick Links</h3>
             <ul className="space-y-3">
-              <li><Link to="/" className="body-muted hover:text-[#00FFD1] transition-colors">Home</Link></li>
-              <li><Link to="/services" className="body-muted hover:text-[#00FFD1] transition-colors">Services</Link></li>
-              <li><Link to="/solutions" className="body-muted hover:text-[#00FFD1] transition-colors">Solutions</Link></li>
-              <li><Link to="/case-studies" className="body-muted hover:text-[#00FFD1] transition-colors">Case Studies</Link></li>
-              <li><Link to="/about" className="body-muted hover:text-[#00FFD1] transition-colors">About Us</Link></li>
-              <li><Link to="/faq" className="body-muted hover:text-[#00FFD1] transition-colors">FAQ</Link></li>
+              <li><Link to="/" className="footer-link inline-block py-0.5">Home</Link></li>
+              <li><Link to="/services" className="footer-link inline-block py-0.5">Services</Link></li>
+              <li><Link to="/solutions" className="footer-link inline-block py-0.5">Solutions</Link></li>
+              <li><Link to="/case-studies" className="footer-link inline-block py-0.5">Case Studies</Link></li>
+              <li><Link to="/about" className="footer-link inline-block py-0.5">About Us</Link></li>
+              <li><Link to="/faq" className="footer-link inline-block py-0.5">FAQ</Link></li>
             </ul>
           </div>
 
           {/* Services */}
-          <div>
+          <div className="relative z-20">
             <h3 className="heading-3 mb-4">Services</h3>
             <ul className="space-y-3">
-              <li><span className="body-muted">AI & Machine Learning</span></li>
-              <li><span className="body-muted">OCR & Automation</span></li>
-              <li><span className="body-muted">Custom Software</span></li>
-              <li><span className="body-muted">Web & Mobile Apps</span></li>
-              <li><span className="body-muted">Cloud & DevOps</span></li>
+              {footerServices.map((service) => (
+                <li key={service.id}>
+                  <Link
+                    to={`/services/${service.id}`}
+                    className="footer-link inline-block py-0.5"
+                  >
+                    {service.title}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -87,7 +94,7 @@ const Footer = () => {
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
                 <Mail size={20} className="text-[#00FFD1] mt-1 flex-shrink-0" />
-                <a href="mailto:contact@apexnexon.tech" className="body-muted hover:text-[#00FFD1] transition-colors">contact@apexnexon.tech</a>
+                <a href="mailto:contact@apexnexon.tech" className="footer-link">contact@apexnexon.tech</a>
               </li>
               <li className="flex items-start gap-3">
                 <Phone size={20} className="text-[#00FFD1] mt-1 flex-shrink-0" />

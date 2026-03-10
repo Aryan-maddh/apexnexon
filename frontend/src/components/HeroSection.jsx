@@ -1,4 +1,4 @@
-import React, { Suspense, useState, useEffect } from 'react';
+import React, { Suspense } from 'react';
 // import Spline from '@splinetool/react-spline'; // Removed static import
 import { motion } from 'framer-motion';
 import { ArrowRight, PlayCircle } from 'lucide-react';
@@ -7,14 +7,6 @@ import { Link } from 'react-router-dom';
 const Spline = React.lazy(() => import('@splinetool/react-spline'));
 
 const HeroSection = () => {
-  const [isDesktop, setIsDesktop] = useState(false);
-
-  useEffect(() => {
-    const checkIsDesktop = () => setIsDesktop(window.innerWidth >= 1024);
-    checkIsDesktop();
-    window.addEventListener('resize', checkIsDesktop);
-    return () => window.removeEventListener('resize', checkIsDesktop);
-  }, []);
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden bg-black pt-20">
@@ -33,13 +25,13 @@ const HeroSection = () => {
       </div>
 
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-[7.6923%] w-full relative z-10 py-12">
-        <div className="grid lg:grid-cols-[1fr_1.2fr] gap-12 lg:gap-16 items-center">
-          {/* Left Side - Content */}
+        <div className="grid lg:grid-cols-[1fr_1.2fr] gap-8 lg:gap-16 items-center min-h-0">
+          {/* Content: same order on mobile and desktop (left column) */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            className="order-2 lg:order-1"
+            className="order-1"
           >
             {/* ... (keep existing content up to buttons) ... */}
             <motion.div
@@ -108,36 +100,27 @@ const HeroSection = () => {
             </motion.div>
           </motion.div>
 
-          {/* Right Side - Spline Animation */}
+          {/* Same 3D ball on all viewports – height/scale tuned so mobile matches desktop feel */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="relative h-[480px] sm:h-[540px] lg:h-[700px] flex items-center justify-center order-1 lg:order-2 px-2 sm:px-4 lg:pl-4 lg:pr-0"
+            className="relative h-[380px] sm:h-[480px] lg:h-[700px] flex items-center justify-center order-2 px-2 sm:px-4 lg:pl-4 lg:pr-0"
           >
-            <div
-              className="w-full h-full relative flex items-center justify-center"
-              style={{ overflow: 'visible' }}
-            >
-              <div className="hero-spline-wrap w-full h-full origin-center scale-[0.62] sm:scale-85 md:scale-95 lg:scale-100">
-                {isDesktop ? (
-                  <Suspense fallback={<div className="animate-pulse bg-white/5 w-full h-full rounded-full" />}>
-                    <Spline scene="https://prod.spline.design/NbVmy6DPLhY-5Lvg/scene.splinecode" />
-                  </Suspense>
-                ) : (
-                  /* Mobile Fallback */
-                  <div className="w-full h-full flex items-center justify-center">
-                    <div className="w-64 h-64 bg-gradient-to-tr from-[#00FFD1]/20 to-purple-500/20 rounded-full blur-3xl opacity-50" />
-                  </div>
-                )}
+            <div className="w-full h-full relative flex items-center justify-center" style={{ overflow: 'visible' }}>
+              <div className="hero-spline-wrap w-full h-full origin-center scale-[0.82] sm:scale-[0.88] md:scale-95 lg:scale-100 min-h-[320px]">
+                <Suspense fallback={<div className="animate-pulse bg-white/5 w-full h-full rounded-full min-h-[320px]" />}>
+                  <Spline scene="https://prod.spline.design/NbVmy6DPLhY-5Lvg/scene.splinecode" />
+                </Suspense>
               </div>
             </div>
           </motion.div>
         </div>
       </div>
 
-      {/* Gradient Glow */}
-      <div className="absolute top-1/4 right-1/4 w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] bg-[#00FFD1]/10 blur-[120px] pointer-events-none"></div>
+      {/* Gradient glow – visible on mobile and desktop for same feel */}
+      <div className="absolute top-1/4 right-1/4 w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] bg-[#00FFD1]/10 blur-[120px] pointer-events-none" aria-hidden />
+      <div className="absolute bottom-1/4 left-1/2 -translate-x-1/2 w-[280px] h-[280px] bg-[#00FFD1]/8 blur-[80px] pointer-events-none lg:hidden" aria-hidden />
     </section>
   );
 };

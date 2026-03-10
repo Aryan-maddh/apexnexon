@@ -63,20 +63,27 @@ export const servicesData = [
   },
   {
     id: 7,
+    title: "Zoho Implementation & Integration",
+    description: "Implement, customize, and integrate the Zoho suite—CRM, Books, Analytics, Creator, and more—with workflows, automation, and your existing systems.",
+    icon: "briefcase",
+    features: ["Zoho CRM & Sales", "Zoho Books & Finance", "Zoho Creator & Automation", "API & Third-Party Integration"]
+  },
+  {
+    id: 8,
     title: "Cloud & DevOps Setup",
     description: "Deploy, scale, and manage your applications with modern cloud infrastructure and DevOps practices for maximum reliability.",
     icon: "cloud",
     features: ["AWS/Azure/GCP", "CI/CD Pipelines", "Container Orchestration", "Infrastructure as Code"]
   },
   {
-    id: 8,
+    id: 9,
     title: "Shopify Development & Integration",
     description: "Build, customize, and scale your e-commerce presence on Shopify with custom themes, apps, and seamless integrations.",
     icon: "store",
     features: ["Custom Themes", "Shopify Apps", "API Integration", "Store Migration"]
   },
   {
-    id: 9,
+    id: 10,
     title: "Web Development",
     description: "Professional websites and web applications built with modern frameworks—responsive, fast, and tailored to your brand and business goals.",
     icon: "globe",

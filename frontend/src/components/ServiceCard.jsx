@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import {
-  Brain, FileText, Code, Smartphone, Zap, Layers, Cloud, Store, Globe,
+  Brain, FileText, Code, Smartphone, Zap, Layers, Cloud, Store, Globe, Briefcase,
   ArrowRight
 } from 'lucide-react';
 
@@ -15,7 +15,8 @@ const iconMap = {
   layers: Layers,
   cloud: Cloud,
   store: Store,
-  globe: Globe
+  globe: Globe,
+  briefcase: Briefcase,
 };
 
 const ServiceCard = ({ service, index }) => {

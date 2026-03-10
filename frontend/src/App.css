@@ -97,6 +97,21 @@ body {
   color: #4D4D4D; 
 }
 
+/* Footer links – clearly visible and clickable */
+footer .footer-link {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: color 0.2s ease;
+}
+footer .footer-link:hover {
+  color: #00FFD1;
+}
+
 /* Button Styles */
 .btn-primary {
   background: #00FFD1;

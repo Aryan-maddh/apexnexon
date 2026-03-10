@@ -102,8 +102,8 @@ const ServiceDetail = () => {
         description={longDescription}
         url={window.location.href}
       />
-      {/* Page-level gradient for depth */}
-      <div className="fixed inset-0 pointer-events-none z-0" aria-hidden="true">
+      {/* Page-level gradient for depth — not fixed so footer is never covered */}
+      <div className="absolute inset-0 pointer-events-none z-0" aria-hidden="true">
         <div className="absolute inset-0 bg-gradient-to-b from-black via-[#08080c] to-black opacity-90" />
         <div className="absolute top-0 left-0 w-full h-1/2" style={{ background: 'radial-gradient(ellipse 80% 50% at 80% 20%, rgba(0,255,209,0.06), transparent 70%)' }} />
         <div className="absolute bottom-1/3 right-0 w-1/2 h-1/2 opacity-60" style={{ background: 'radial-gradient(ellipse 60% 60% at 100% 80%, rgba(0,255,209,0.04), transparent 70%)' }} />
