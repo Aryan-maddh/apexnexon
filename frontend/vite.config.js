@@ -33,7 +33,10 @@ export default defineConfig(({ mode }) => ({
           ssr: true,
           rollupOptions: {
             input: './src/entry-server.jsx',
-            output: { entryFileNames: 'entry-server.js' },
+            output: {
+            entryFileNames: 'entry-server.js',
+            format: 'es',
+          },
           },
           outDir: 'dist/server',
           emptyOutDir: false,
