@@ -5,9 +5,11 @@ import { techStackData } from '../data/mock';
 import { Target, Zap, ArrowRight, ChevronDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import PageMeta from '../components/SEO/PageMeta';
-import { FAQPageSchema } from '../components/SEO/SchemaOrg';
+import { FAQPageSchema, BreadcrumbListSchema } from '../components/SEO/SchemaOrg';
 import { brandEntity, canonicalSentence } from '../data/brandEntity';
 import { brandFaq } from '../data/brandFaq';
+
+const SITE_URL = 'https://apexnexon.tech';
 
 const About = () => {
   usePageTitle('About');
@@ -16,10 +18,11 @@ const About = () => {
   return (
     <div className="bg-black min-h-screen pt-[80px]">
       <PageMeta
-        title="About Us"
-        description={brandEntity.metaDescription}
+        fullTitle="About ApexNexon | Technology & AI Solutions Company"
+        description="ApexNexon is a technology and AI solutions company. We help businesses automate processes, build custom software, and integrate AI into their operations."
       />
       <FAQPageSchema />
+      <BreadcrumbListSchema items={[{ name: 'Home', url: SITE_URL }, { name: 'About Us', url: `${SITE_URL}/about` }]} />
 
       {/* Hero: Canonical entity definition */}
       <section className="py-24 relative">

@@ -5,11 +5,20 @@ import CaseStudyCard from '../components/CaseStudyCard';
 import { caseStudiesData } from '../data/mock';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import PageMeta from '../components/SEO/PageMeta';
+import { BreadcrumbListSchema } from '../components/SEO/SchemaOrg';
+
+const SITE_URL = 'https://apexnexon.tech';
 
 const CaseStudies = () => {
   usePageTitle('Case Studies');
   return (
     <div className="bg-black min-h-screen pt-[80px]">
+      <PageMeta
+        title="Case Studies"
+        description="See how ApexNexon has helped businesses achieve transformative results with AI and automation. Real outcomes across healthcare, finance, and more."
+      />
+      <BreadcrumbListSchema items={[{ name: 'Home', url: SITE_URL }, { name: 'Case Studies', url: `${SITE_URL}/case-studies` }]} />
       {/* Hero */}
       <section className="py-24 relative">
         <div className="max-w-[1400px] mx-auto px-[7.6923%]">

@@ -9,7 +9,7 @@ import {
   ShieldCheck, Cpu, Rocket, Layers, TrendingUp, Headphones, ArrowRight
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { OrganizationSchema } from '../components/SEO/SchemaOrg';
+import { OrganizationSchema, WebSiteSchema, SpeakableSchema } from '../components/SEO/SchemaOrg';
 import PageMeta from '../components/SEO/PageMeta';
 import { brandEntity } from '../data/brandEntity';
 
@@ -27,10 +27,12 @@ const Home = () => {
   return (
     <div className="bg-black">
       <PageMeta
-        title="AI & Automation Solutions"
-        description={brandEntity.metaDescription}
+        fullTitle="ApexNexon | AI Automation & Custom Software Development"
+        description="ApexNexon is a technology and AI solutions company helping businesses automate processes, build custom software, and integrate AI to improve efficiency and productivity."
       />
       <OrganizationSchema />
+      <WebSiteSchema />
+      <SpeakableSchema cssSelector="#hero-value-prop" />
       {/* Hero Section */}
       <HeroSection />
 

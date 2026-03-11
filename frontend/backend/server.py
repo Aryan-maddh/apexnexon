@@ -158,9 +158,12 @@ ALLOWED_IMAGE_TYPES = {"image/jpeg", "image/png", "image/gif", "image/webp"}
 
 
 def _require_blog_edit_key(req: Request):
-    """If BLOG_EDIT_KEY is set, require X-Blog-Edit-Key header to match. Raise 401 otherwise."""
+    """Require BLOG_EDIT_KEY to be set and X-Blog-Edit-Key header to match. Reject otherwise."""
     if not BLOG_EDIT_KEY:
-        return
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="Blog editing is disabled. Set BLOG_EDIT_KEY on the server to enable.",
+        )
     key = req.headers.get("X-Blog-Edit-Key", "").strip()
     if key != BLOG_EDIT_KEY:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid or missing edit key")
@@ -168,9 +171,12 @@ def _require_blog_edit_key(req: Request):
 
 @api_router.post("/blog/verify")
 async def verify_blog_edit_key(body: dict):
-    """Verify the blog edit key. Returns { success: true } if key matches BLOG_EDIT_KEY."""
+    """Verify the blog edit key. Returns { success: true } only if key matches BLOG_EDIT_KEY."""
     if not BLOG_EDIT_KEY:
-        return {"success": True, "message": "No key configured"}
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="Blog editing is not configured. Set BLOG_EDIT_KEY to enable.",
+        )
     key = (body.get("key") or "").strip()
     if key != BLOG_EDIT_KEY:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid key")

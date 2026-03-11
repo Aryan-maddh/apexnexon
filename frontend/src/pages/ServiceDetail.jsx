@@ -13,6 +13,7 @@ import {
   Cloud,
   Store,
   Globe,
+  Briefcase,
   ArrowRight,
   CheckCircle2,
   Target,
@@ -29,7 +30,8 @@ const iconMap = {
   layers: Layers,
   cloud: Cloud,
   store: Store,
-  globe: Globe
+  globe: Globe,
+  briefcase: Briefcase
 };
 
 // Default content when service has no extended fields
@@ -54,12 +56,22 @@ function getServiceDetail(service) {
   return { longDescription, benefits, outcomes, approach };
 }
 
-import { ServiceSchema } from '../components/SEO/SchemaOrg';
+import { ServiceSchema, BreadcrumbListSchema } from '../components/SEO/SchemaOrg';
 import PageMeta from '../components/SEO/PageMeta';
+
+const SITE_URL = 'https://apexnexon.tech';
 
 const ServiceDetail = () => {
   const { id } = useParams();
   const service = servicesData.find((s) => String(s.id) === id);
+  const canonicalServiceUrl = service ? `${SITE_URL}/services/${id}` : '';
+  const breadcrumbItems = service
+    ? [
+        { name: 'Home', url: SITE_URL },
+        { name: 'Services', url: `${SITE_URL}/services` },
+        { name: service.title, url: canonicalServiceUrl }
+      ]
+    : [];
 
   // Provide a safe default for title hook, though we handle !service below
   usePageTitle(service ? service.title : 'Service');
@@ -100,8 +112,9 @@ const ServiceDetail = () => {
       <ServiceSchema
         name={service.title}
         description={longDescription}
-        url={window.location.href}
+        url={canonicalServiceUrl}
       />
+      <BreadcrumbListSchema items={breadcrumbItems} />
       {/* Page-level gradient for depth — not fixed so footer is never covered */}
       <div className="absolute inset-0 pointer-events-none z-0" aria-hidden="true">
         <div className="absolute inset-0 bg-gradient-to-b from-black via-[#08080c] to-black opacity-90" />
@@ -332,6 +345,35 @@ const ServiceDetail = () => {
               </p>
             </div>
           </motion.div>
+        </div>
+      </section>
+
+      {/* Service FAQ — AEO */}
+      <section className="py-16 lg:py-20 relative z-10" aria-labelledby="service-faq-heading">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-[7.6923%]">
+          <h2 id="service-faq-heading" className="heading-2 mb-10 text-center">
+            Frequently asked questions about {service.title}
+          </h2>
+          <div className="max-w-[800px] mx-auto space-y-8">
+            <div>
+              <h3 className="heading-3 text-white mb-2">What is {service.title}?</h3>
+              <p className="body-medium text-white/85">
+                {service.longDescription || `${service.description} ApexNexon designs, builds, and deploys these solutions for mid-market and enterprise clients so they can digitize operations and achieve measurable ROI.`}
+              </p>
+            </div>
+            <div>
+              <h3 className="heading-3 text-white mb-2">How does {service.title} work?</h3>
+              <p className="body-medium text-white/85">
+                We work with you from discovery through deployment: we define requirements and success metrics, design and build the solution, integrate with your existing systems, and provide ongoing support. Typical time to first value is 8–12 weeks with 3–5x ROI in the first year.
+              </p>
+            </div>
+            <div>
+              <h3 className="heading-3 text-white mb-2">Who needs {service.title}?</h3>
+              <p className="body-medium text-white/85">
+                Mid-market and enterprise organizations that need custom solutions rather than off-the-shelf tools—especially in document-heavy or compliance-sensitive industries such as healthcare, finance, logistics, e-commerce, and education.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 

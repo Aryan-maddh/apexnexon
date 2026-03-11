@@ -3,11 +3,16 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Shield } from 'lucide-react';
 import { usePageTitle } from '../hooks/usePageTitle';
+import PageMeta from '../components/SEO/PageMeta';
 
 const Privacy = () => {
   usePageTitle('Privacy Policy');
   return (
     <div className="bg-black min-h-screen pt-[80px]">
+      <PageMeta
+        title="Privacy Policy"
+        description="ApexNexon privacy policy: how we collect, use, and protect your information when you use apexnexon.tech and our services."
+      />
       <section className="py-24 relative">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-[7.6923%]">
           <motion.div

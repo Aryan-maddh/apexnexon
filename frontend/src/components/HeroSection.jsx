@@ -58,8 +58,9 @@ const HeroSection = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
               className="text-base sm:text-lg lg:text-xl text-white/85 mb-8 max-w-[600px] leading-relaxed"
+              id="hero-value-prop"
             >
-              Build intelligent systems, automate operations, and scale your business with cutting-edge AI, OCR, RPA, and custom software solutions.
+              ApexNexon is an enterprise AI and automation company. We build custom intelligent systems—including OCR, RPA, and ML solutions—so mid-market and enterprise organizations can digitize operations, reduce manual work, and achieve measurable ROI. Build intelligent systems, automate operations, and scale with cutting-edge AI and custom software.
             </motion.p>
 
             <motion.div

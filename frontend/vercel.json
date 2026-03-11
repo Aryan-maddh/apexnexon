@@ -1,5 +1,34 @@
 {
-  "rewrites": [
-    { "source": "/api/:path*", "destination": "/api" }
+  "version": 2,
+  "builds": [
+    {
+      "src": "server/server.mjs",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "dist/client/**",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    { "src": "/assets/(.*)", "dest": "/dist/client/assets/$1" },
+    { "src": "/robots.txt", "dest": "/dist/client/robots.txt" },
+    { "src": "/sitemap.xml", "dest": "/dist/client/sitemap.xml" },
+    { "src": "/llms.txt", "dest": "/dist/client/llms.txt" },
+    { "src": "/llms-full.txt", "dest": "/dist/client/llms-full.txt" },
+    { "src": "/og-image.png", "dest": "/dist/client/og-image.png" },
+    { "src": "/manifest.json", "dest": "/dist/client/manifest.json" },
+    { "src": "/(.*)", "dest": "/server/server.mjs" }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "DENY" },
+        { "key": "X-XSS-Protection", "value": "1; mode=block" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
+      ]
+    }
   ]
 }

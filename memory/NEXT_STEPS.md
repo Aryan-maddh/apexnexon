@@ -13,13 +13,13 @@ All the “real business” changes are in your repo but may not be live yet.
 - **If you deploy manually:**  
   Run `yarn build` (or `npm run build`) in `frontend/`, then upload the `build/` output to your host.
 
-After this, apexnexon.tech will show: favicon, Privacy/Terms, Trusted by strip, per-page titles, no Emergent/PostHog, case study “Anonymized” and testimonial “Case study client” labels.
+After this, apexnexon.tech will show: favicon, Privacy/Terms, Trusted by strip, per-page titles, GA-only analytics, case study “Anonymized” and testimonial “Case study client” labels.
 
 ---
 
 ## 2. Check the contact form
 
-- Your frontend uses **`REACT_APP_BACKEND_URL`** (currently `https://apexnexon-web.preview.emergentagent.com`).
+- Your frontend uses **`REACT_APP_BACKEND_URL`** (set to your deployed API URL in the host environment).
 - On **apexnexon.tech**, the build must use the **same** backend URL (set in your host’s environment variables).
 - Submit a test message from the live site and confirm:
   - Success toast appears.

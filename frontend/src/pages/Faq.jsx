@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { usePageTitle } from '../hooks/usePageTitle';
 import PageMeta from '../components/SEO/PageMeta';
-import { FAQPageSchema } from '../components/SEO/SchemaOrg';
+import { FAQPageSchema, BreadcrumbListSchema } from '../components/SEO/SchemaOrg';
 import { brandEntity } from '../data/brandEntity';
 import { brandFaq } from '../data/brandFaq';
 import { ChevronDown } from 'lucide-react';
+
+const SITE_URL = 'https://apexnexon.tech';
 
 const Faq = () => {
   usePageTitle('FAQ');
@@ -18,6 +20,7 @@ const Faq = () => {
         description={`${brandEntity.definition} Common questions: what we do, who we serve, and why choose ApexNexon.`}
       />
       <FAQPageSchema />
+      <BreadcrumbListSchema items={[{ name: 'Home', url: SITE_URL }, { name: 'FAQ', url: `${SITE_URL}/faq` }]} />
 
       <section className="py-24 relative">
         <div className="max-w-[1400px] mx-auto px-[7.6923%]">

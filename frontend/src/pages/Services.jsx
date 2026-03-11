@@ -12,8 +12,8 @@ const Services = () => {
   return (
     <div className="bg-black min-h-screen pt-[80px]">
       <PageMeta
-        title="Our Services - AI & Custom Software"
-        description="Explore our comprehensive technology solutions including AI, OCR, RPA, and custom software development designed for enterprise scale."
+        fullTitle="Our Services | ApexNexon - AI Automation & Workflow Solutions"
+        description="AI automation, workflow optimization, custom software development, and digital product engineering. ApexNexon delivers solutions for businesses seeking efficiency and growth."
       />
       {/* Hero */}
       <section className="py-24 relative">

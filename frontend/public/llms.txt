@@ -1,0 +1,17 @@
+# ApexNexon
+> ApexNexon is a technology and AI solutions company that helps businesses automate processes, build custom software, and integrate AI into their operations to improve efficiency and productivity.
+
+## Services
+- AI Automation: Automating business workflows and repetitive processes using AI
+- Workflow Optimization: Streamlining business operations for maximum efficiency
+- Custom Software Development: Building tailored software solutions for businesses
+- Digital Product Engineering: End-to-end product design and development
+
+## About
+ApexNexon is a technology company specializing in AI automation and custom software development. We help businesses across industries integrate artificial intelligence into their operations, optimize workflows, and build digital products that drive growth.
+
+Our team of engineers and AI specialists deliver solutions ranging from intelligent automation systems to full-stack web and mobile applications.
+
+## Contact
+- Website: https://apexnexon.tech
+- Location: India

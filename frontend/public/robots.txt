@@ -1,5 +1,13 @@
 User-agent: *
 Allow: /
-
-# Sitemaps
+User-agent: GPTBot
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: anthropic-ai
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: Googlebot
+Allow: /
 Sitemap: https://apexnexon.tech/sitemap.xml

@@ -4,6 +4,7 @@ import { usePageTitle } from '../hooks/usePageTitle';
 import { Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Send, Lock } from 'lucide-react';
 import { toast } from 'sonner';
+import PageMeta from '../components/SEO/PageMeta';
 
 const BLOG_EDIT_STORAGE_KEY = 'blog_edit_key';
 
@@ -34,52 +35,36 @@ const BlogNew = () => {
     if (stored) {
       setEditKey(stored);
       setIsAuthenticated(true);
-      setKeyCheckDone(true);
-      return;
     }
-    const url = process.env.REACT_APP_BACKEND_URL;
-    if (!url) {
-      setKeyCheckDone(true);
-      return;
-    }
-    fetch('/api/blog/verify', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ key: '' })
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.success && data.message === 'No key configured') {
-          setIsAuthenticated(true);
-        }
-      })
-      .catch(() => { })
-      .finally(() => setKeyCheckDone(true));
+    setKeyCheckDone(true);
   }, []);
 
   const handleKeySubmit = async (e) => {
     e.preventDefault();
-    if (!keyInput.trim()) return;
+    const key = keyInput.trim();
+    if (!key) {
+      toast.error('Please enter the edit key.');
+      return;
+    }
     setKeySubmitting(true);
     try {
-      const url = process.env.REACT_APP_BACKEND_URL;
       const res = await fetch('/api/blog/verify', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ key: keyInput.trim() })
+        body: JSON.stringify({ key })
       });
+      const data = await res.json().catch(() => ({}));
       if (!res.ok) {
-        const err = await res.json().catch(() => ({}));
-        throw new Error(err.detail || 'Invalid key');
+        const msg = data.detail || (res.status === 503 ? 'Blog editing is not configured on the server.' : 'Invalid edit key.');
+        throw new Error(msg);
       }
-      const data = await res.json();
       if (data.success) {
-        sessionStorage.setItem(BLOG_EDIT_STORAGE_KEY, keyInput.trim());
-        setEditKey(keyInput.trim());
+        sessionStorage.setItem(BLOG_EDIT_STORAGE_KEY, key);
+        setEditKey(key);
         setIsAuthenticated(true);
         setKeyInput('');
         toast.success('Access granted.');
-      } else throw new Error('Invalid key');
+      } else throw new Error('Invalid edit key.');
     } catch (err) {
       toast.error(err.message || 'Invalid edit key.');
     } finally {
@@ -180,6 +165,7 @@ const BlogNew = () => {
 
   return (
     <div className="bg-black min-h-screen pt-[80px]">
+      <PageMeta title="Write a post" description="Authorized editors can write and publish blog posts for ApexNexon. Enter the edit key to continue." />
       <section className="py-16 relative">
         <div className="max-w-[800px] mx-auto px-4 sm:px-6 lg:px-[7.6923%]">
           <Link

@@ -82,8 +82,8 @@ const Contact = () => {
   return (
     <div className="bg-black min-h-screen pt-[80px]">
       <PageMeta
-        title="Contact Us - Let's Build Something Amazing"
-        description="Ready to transform your business with AI? Contact ApexNexon for a free consultation. We serve clients globally."
+        fullTitle="Contact ApexNexon | Get in Touch"
+        description="Get in touch with ApexNexon for AI automation, custom software development, and technology solutions. We serve clients globally."
       />
       {/* Hero */}
       <section className="py-24 relative">

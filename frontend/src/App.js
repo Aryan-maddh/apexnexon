@@ -3,11 +3,12 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import React, { useEffect, Suspense, lazy } from "react";
 import "@/App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import ScrollToTop from "./components/ScrollToTop";
+import BackToTop from "./components/BackToTop";
 
-// Lazy loading pages
-const Home = lazy(() => import("./pages/Home"));
+// Home loaded eagerly so prerender gets initial content; others lazy
+import Home from "./pages/Home";
 const Services = lazy(() => import("./pages/Services"));
 const ServiceDetail = lazy(() => import("./pages/ServiceDetail"));
 const Solutions = lazy(() => import("./pages/Solutions"));
@@ -19,6 +20,7 @@ const Contact = lazy(() => import("./pages/Contact"));
 const Privacy = lazy(() => import("./pages/Privacy"));
 const Terms = lazy(() => import("./pages/Terms"));
 const Faq = lazy(() => import("./pages/Faq"));
+const NotFound = lazy(() => import("./pages/NotFound"));
 
 // Loading fallback
 const PageLoader = () => (
@@ -43,28 +45,28 @@ function App() {
 
   return (
     <div className="App bg-black">
-      <BrowserRouter>
-        <ScrollToTop />
-        <Navbar />
-        <Suspense fallback={<PageLoader />}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/services/:id" element={<ServiceDetail />} />
-            <Route path="/solutions" element={<Solutions />} />
-            <Route path="/case-studies" element={<CaseStudies />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/blog/new" element={<BlogNew />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/privacy" element={<Privacy />} />
-            <Route path="/terms" element={<Terms />} />
-            <Route path="/faq" element={<Faq />} />
-          </Routes>
-        </Suspense>
-        <Footer />
-        <Toaster position="top-right" />
-      </BrowserRouter>
+      <ScrollToTop />
+      <Navbar />
+      <Suspense fallback={<PageLoader />}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/services/:id" element={<ServiceDetail />} />
+          <Route path="/solutions" element={<Solutions />} />
+          <Route path="/case-studies" element={<CaseStudies />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/new" element={<BlogNew />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/faq" element={<Faq />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Suspense>
+      <Footer />
+      <BackToTop />
+      <Toaster position="top-right" />
     </div>
   );
 }

@@ -13,7 +13,7 @@
 - [x] Open Graph & Twitter meta tags for apexnexon.tech (including `og:image` and `twitter:image`)
 - [x] `.env.example` with `REACT_APP_BACKEND_URL` and `REACT_APP_GA_MEASUREMENT_ID`
 - [x] Per-page document titles via `usePageTitle()` on all pages
-- [x] Emergent badge and PostHog removed from `index.html` (GA-only analytics)
+- [x] Third-party analytics badge and PostHog removed from `index.html` (GA-only analytics)
 - [x] Case studies: "Anonymized" label on each card
 - [x] Testimonials: "Case study client · As told to ApexNexon" on each card
 
@@ -23,7 +23,7 @@
 
 | Change | Why |
 |--------|-----|
-| **Title & meta** | `index.html` had "Emergent \| Fullstack App" — updated to ApexNexon. Add unique `<title>` and `<meta name="description">` per page for SEO. |
+| **Title & meta** | `index.html` uses ApexNexon. Add unique `<title>` and `<meta name="description">` per page for SEO. |
 | **Favicon** | Add an ApexNexon favicon (e.g. simple "A" or logo) in `public/favicon.ico` so the tab looks like a real brand. |
 | **Open Graph** | Add `<meta property="og:title">`, `og:description`, `og:image` so links look good when shared (LinkedIn, Twitter, etc.). |
 
@@ -99,7 +99,7 @@ Result: `https://apexnexon.com` (or your domain) with a working contact form and
 | **Env for backend URL** | In production, set `REACT_APP_BACKEND_URL` to your deployed API URL so the contact form works live. |
 | **Form loading state** | You have `isSubmitting`; ensure the button shows “Sending…” and is disabled to avoid double submit. |
 | **Google Maps** | Replace placeholder with a real location (office or college) or a single “We work globally” map. |
-| **Remove or rebrand “Made with Emergent”** | For a college project, either remove the badge or keep it only in dev; use ApexNexon branding in `index.html`. |
+| **Remove or rebrand “Made with ApexNexon”** | Use ApexNexon branding in `index.html` and all meta tags; no third-party badges in production. |
 
 ---
 
@@ -113,7 +113,7 @@ Result: `https://apexnexon.com` (or your domain) with a working contact form and
 
 ## Summary: What Makes It “Look Real”
 
-- **Consistent branding:** ApexNexon everywhere (title, meta, favicon, no Emergent in production).
+- **Consistent branding:** ApexNexon everywhere (title, meta, favicon).
 - **Trust cues:** “Trusted by” strip, real contact details, social links.
 - **Legal:** Privacy + Terms pages and working footer links.
 - **Live site:** Deployed URL (with optional custom domain) and working contact form with email delivery.

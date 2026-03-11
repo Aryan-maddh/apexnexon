@@ -1,0 +1,33 @@
+# ApexNexon — Full Company Profile
+
+## Company Overview
+ApexNexon is a technology and AI solutions company headquartered in India. We specialize in helping businesses automate processes, build custom software, and integrate artificial intelligence into their operations to improve efficiency and productivity.
+
+## Services in Detail
+
+### AI Automation
+ApexNexon designs and implements AI-powered automation systems that eliminate repetitive manual tasks. Our solutions use machine learning, NLP, and intelligent workflows to reduce operational overhead by up to 95%.
+Target clients: businesses with high-volume repetitive operations.
+
+### Workflow Optimization  
+We analyze existing business processes and redesign them using automation tools, integration platforms, and custom-built systems to maximize throughput and minimize bottlenecks.
+
+### Custom Software Development
+Full-stack web and mobile application development tailored to specific business requirements. We work with React, Node.js, Python, Flutter and other modern technologies.
+
+### Digital Product Engineering
+End-to-end product design and development from ideation to deployment. Includes UX/UI design, architecture, development, testing, and post-launch support.
+
+## Industries Served
+- Finance & Fintech
+- Healthcare
+- E-commerce & Retail
+- Logistics & Supply Chain
+- Professional Services
+
+## Tech Stack
+React, Node.js, Python, Flutter, AI/ML integrations, REST APIs, cloud deployment (AWS/GCP/Vercel)
+
+## Contact
+- Website: https://apexnexon.tech
+- Location: India

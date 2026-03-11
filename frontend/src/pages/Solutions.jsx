@@ -5,11 +5,20 @@ import IndustryCard from '../components/IndustryCard';
 import { industriesData } from '../data/mock';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import PageMeta from '../components/SEO/PageMeta';
+import { BreadcrumbListSchema } from '../components/SEO/SchemaOrg';
+
+const SITE_URL = 'https://apexnexon.tech';
 
 const Solutions = () => {
   usePageTitle('Solutions');
   return (
     <div className="bg-black min-h-screen pt-[80px]">
+      <PageMeta
+        title="Industry Solutions"
+        description="ApexNexon delivers specialized AI and automation solutions for healthcare, finance, logistics, e-commerce, and education. Industry-specific expertise with measurable ROI."
+      />
+      <BreadcrumbListSchema items={[{ name: 'Home', url: SITE_URL }, { name: 'Solutions', url: `${SITE_URL}/solutions` }]} />
       {/* Hero */}
       <section className="py-24 relative">
         <div className="max-w-[1400px] mx-auto px-[7.6923%]">

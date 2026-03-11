@@ -3,11 +3,16 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { FileText } from 'lucide-react';
 import { usePageTitle } from '../hooks/usePageTitle';
+import PageMeta from '../components/SEO/PageMeta';
 
 const Terms = () => {
   usePageTitle('Terms of Service');
   return (
     <div className="bg-black min-h-screen pt-[80px]">
+      <PageMeta
+        title="Terms of Service"
+        description="Terms of service for using ApexNexon website (apexnexon.tech). Acceptance, use, and legal terms."
+      />
       <section className="py-24 relative">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-[7.6923%]">
           <motion.div
