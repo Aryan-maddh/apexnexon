@@ -20,9 +20,12 @@ export default async function handler(req, res) {
       ? `${helmet.title.toString()}${helmet.meta.toString()}${helmet.link.toString()}`
       : '';
 
-    const finalHtml = clientHtml
-      .replace('<!--helmet-->', helmetStr)
-      .replace('<!--ssr-outlet-->', appHtml);
+    let finalHtml = clientHtml.replace('<!--helmet-->', helmetStr);
+    if (clientHtml.includes('<!--ssr-outlet-->')) {
+      finalHtml = finalHtml.replace('<!--ssr-outlet-->', appHtml);
+    } else {
+      finalHtml = finalHtml.replace('<div id="root"></div>', `<div id="root">${appHtml}</div>`);
+    }
 
     res.setHeader('Content-Type', 'text/html');
     res.status(200).send(finalHtml);

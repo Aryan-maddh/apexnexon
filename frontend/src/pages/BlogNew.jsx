@@ -100,7 +100,7 @@ const BlogNew = () => {
     }
     setImageUploading(true);
     try {
-      const url = process.env.REACT_APP_BACKEND_URL;
+      const url = import.meta.env.VITE_BACKEND_URL;
       const key = sessionStorage.getItem('blog_edit_key');
       const form = new FormData();
       form.append('file', file);
@@ -136,7 +136,7 @@ const BlogNew = () => {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      const url = process.env.REACT_APP_BACKEND_URL;
+      const url = import.meta.env.VITE_BACKEND_URL;
       const headers = { 'Content-Type': 'application/json' };
       if (editKey) headers['X-Blog-Edit-Key'] = editKey;
       const res = await fetch('/api/blog', {

@@ -30,7 +30,7 @@ const Contact = () => {
     const BACKEND_URL =
       typeof window !== 'undefined'
         ? window.location.origin
-        : (process.env.REACT_APP_BACKEND_URL || '');
+        : (import.meta.env.VITE_BACKEND_URL || '');
     if (!BACKEND_URL) {
       toast.error('Contact form is not configured for this environment. Please email us at contact@apexnexon.tech directly.');
       return;

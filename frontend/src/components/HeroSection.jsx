@@ -9,7 +9,7 @@ const Spline = React.lazy(() => import('@splinetool/react-spline'));
 const HeroSection = () => {
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden bg-black pt-20">
+    <section className="relative min-h-screen flex items-center overflow-hidden bg-black pt-24 sm:pt-28 md:pt-32 lg:pt-36">
       {/* ... (keep existing background pattern) ... */}
       <div className="absolute inset-0 opacity-[0.07]">
         <div

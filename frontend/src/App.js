@@ -31,7 +31,7 @@ const PageLoader = () => (
 
 function App() {
   useEffect(() => {
-    const gaId = process.env.REACT_APP_GA_MEASUREMENT_ID;
+    const gaId = import.meta.env.VITE_GA_MEASUREMENT_ID;
     if (!gaId) return;
     const script = document.createElement('script');
     script.async = true;

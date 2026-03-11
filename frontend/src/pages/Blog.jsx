@@ -12,7 +12,7 @@ function DeletePostButton({ postId, setPosts, posts }) {
     if (!window.confirm('Delete this blog post?')) return;
     setDeleting(true);
     try {
-      const url = process.env.REACT_APP_BACKEND_URL;
+      const url = import.meta.env.VITE_BACKEND_URL;
       const key = sessionStorage.getItem('blog_edit_key');
       const headers = {};
       if (key) headers['X-Blog-Edit-Key'] = key;
@@ -60,7 +60,7 @@ const Blog = () => {
   }, []);
 
   useEffect(() => {
-    const url = process.env.REACT_APP_BACKEND_URL;
+    const url = import.meta.env.VITE_BACKEND_URL;
     if (!url) {
       setLoading(false);
       return;
