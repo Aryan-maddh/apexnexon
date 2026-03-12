@@ -9,7 +9,7 @@ import {
   ShieldCheck, Cpu, Rocket, Layers, TrendingUp, Headphones, ArrowRight
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { OrganizationSchema, WebSiteSchema, SpeakableSchema } from '../components/SEO/SchemaOrg';
+import { OrganizationSchema, WebSiteSchema, SpeakableSchema, AggregateRatingSchema } from '../components/SEO/SchemaOrg';
 import PageMeta from '../components/SEO/PageMeta';
 import { brandEntity } from '../data/brandEntity';
 
@@ -33,6 +33,13 @@ const Home = () => {
       <OrganizationSchema />
       <WebSiteSchema />
       <SpeakableSchema cssSelector="#hero-value-prop" />
+      <AggregateRatingSchema
+        reviews={testimonialsData.map((t) => ({
+          author: t.name,
+          reviewBody: t.content,
+          ratingValue: t.rating
+        }))}
+      />
       {/* Hero Section */}
       <HeroSection />
 

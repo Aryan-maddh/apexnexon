@@ -6,6 +6,7 @@ import "@/App.css";
 import { Routes, Route } from "react-router-dom";
 import ScrollToTop from "./components/ScrollToTop";
 import BackToTop from "./components/BackToTop";
+import WhatsAppButton from "./components/WhatsAppButton";
 
 // Home loaded eagerly so prerender gets initial content; others lazy
 import Home from "./pages/Home";
@@ -20,6 +21,7 @@ const Contact = lazy(() => import("./pages/Contact"));
 const Privacy = lazy(() => import("./pages/Privacy"));
 const Terms = lazy(() => import("./pages/Terms"));
 const Faq = lazy(() => import("./pages/Faq"));
+const Careers = lazy(() => import("./pages/Careers"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 // Loading fallback
@@ -61,11 +63,13 @@ function App() {
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/faq" element={<Faq />} />
+          <Route path="/careers" element={<Careers />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
       <Footer />
       <BackToTop />
+      <WhatsAppButton />
       <Toaster position="top-right" />
     </div>
   );

@@ -9,18 +9,46 @@ export const OrganizationSchema = () => {
   const schema = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "name": "ApexNexon",
-    "url": "https://apexnexon.tech",
-    "logo": "https://apexnexon.tech/logo.png",
-    "description": "ApexNexon is a technology and AI solutions company that helps businesses automate processes, build custom software, and integrate AI into their operations.",
-    "sameAs": [
-      "https://linkedin.com/company/apexnexon",
-      "https://twitter.com/apexnexon"
+    "name": brandEntity.name,
+    "url": brandEntity.url,
+    "logo": {
+      "@type": "ImageObject",
+      "url": `${SITE_URL}/logo.png`,
+      "width": 200,
+      "height": 60
+    },
+    "description": brandEntity.definition,
+    "slogan": brandEntity.tagline,
+    "email": brandEntity.contactEmail,
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": brandEntity.address.streetAddress,
+      "addressLocality": brandEntity.address.addressLocality,
+      "addressRegion": brandEntity.address.addressRegion,
+      "postalCode": brandEntity.address.postalCode,
+      "addressCountry": brandEntity.address.addressCountry
+    },
+    "sameAs": brandEntity.sameAs,
+    "areaServed": "Worldwide",
+    "knowsAbout": [
+      "Artificial Intelligence",
+      "Machine Learning",
+      "Robotic Process Automation",
+      "OCR Document Processing",
+      "Odoo ERP Implementation",
+      "Zoho CRM Implementation",
+      "Custom Software Development",
+      "Web and Mobile App Development",
+      "Shopify Development",
+      "Cloud DevOps",
+      "Business Process Automation"
     ],
     "contactPoint": {
       "@type": "ContactPoint",
       "contactType": "customer service",
-      "url": "https://apexnexon.tech/contact"
+      "email": brandEntity.contactEmail,
+      "url": `${SITE_URL}/contact`,
+      "availableLanguage": "English"
     }
   };
 
@@ -31,7 +59,7 @@ export const OrganizationSchema = () => {
   );
 };
 
-/** WebSite schema with SearchAction for sitelinks search box (optional). Include on homepage. */
+/** WebSite schema for homepage. */
 export const WebSiteSchema = () => {
   const schema = {
     "@context": "https://schema.org",
@@ -39,11 +67,10 @@ export const WebSiteSchema = () => {
     "name": brandEntity.name,
     "url": SITE_URL,
     "description": brandEntity.definition,
-    "publisher": { "@type": "Organization", "name": brandEntity.name, "url": brandEntity.url },
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": { "@type": "EntryPoint", "urlTemplate": `${SITE_URL}/contact?q={search_term_string}` },
-      "query-input": "required name=search_term_string"
+    "publisher": {
+      "@type": "Organization",
+      "name": brandEntity.name,
+      "url": brandEntity.url
     }
   };
   return (
@@ -91,18 +118,25 @@ export const SpeakableSchema = ({ cssSelector }) => {
   );
 };
 
+/** Service schema. Pass name, description, url. */
 export const ServiceSchema = ({ name, description, url }) => {
   const schema = {
     "@context": "https://schema.org",
     "@type": "Service",
     "serviceType": name,
+    "name": name,
+    "description": description,
+    "url": url,
     "provider": {
       "@type": "Organization",
       "name": brandEntity.name,
       "url": brandEntity.url
     },
-    "description": description,
-    "url": url
+    "areaServed": "Worldwide",
+    "availableChannel": {
+      "@type": "ServiceChannel",
+      "serviceUrl": `${SITE_URL}/contact`
+    }
   };
 
   return (
@@ -112,15 +146,43 @@ export const ServiceSchema = ({ name, description, url }) => {
   );
 };
 
-export const BlogPostSchema = ({ title, description, datePublished, author, image }) => {
+/** HowTo schema for service approach steps. Pass name (string) and steps ([{ title, description }]). */
+export const HowToSchema = ({ name, description, steps }) => {
+  if (!steps || steps.length === 0) return null;
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": name,
+    "description": description,
+    "step": steps.map((step, idx) => ({
+      "@type": "HowToStep",
+      "position": idx + 1,
+      "name": step.title,
+      "text": step.description
+    }))
+  };
+  return (
+    <Helmet>
+      <script type="application/ld+json">{JSON.stringify(schema)}</script>
+    </Helmet>
+  );
+};
+
+/** BlogPosting schema. Pass title, description, datePublished, dateModified, author, image, url, articleBody. */
+export const BlogPostSchema = ({ title, description, datePublished, dateModified, author, image, url, articleBody }) => {
   const schema = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     "headline": title,
-    "image": image,
+    "description": description,
+    "image": {
+      "@type": "ImageObject",
+      "url": image
+    },
     "author": {
       "@type": "Person",
-      "name": author || "ApexNexon Team"
+      "name": author || "ApexNexon Team",
+      "url": SITE_URL
     },
     "publisher": {
       "@type": "Organization",
@@ -128,11 +190,20 @@ export const BlogPostSchema = ({ title, description, datePublished, author, imag
       "url": brandEntity.url,
       "logo": {
         "@type": "ImageObject",
-        "url": "https://apexnexon.tech/logo.png"
+        "url": `${SITE_URL}/logo.png`,
+        "width": 200,
+        "height": 60
       }
     },
     "datePublished": datePublished,
-    "description": description
+    "dateModified": dateModified || datePublished,
+    "inLanguage": "en-US",
+    "url": url || SITE_URL,
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": url || SITE_URL
+    },
+    ...(articleBody ? { "articleBody": articleBody } : {})
   };
 
   return (
@@ -142,12 +213,17 @@ export const BlogPostSchema = ({ title, description, datePublished, author, imag
   );
 };
 
-/** FAQPage schema. Must match visible FAQ content exactly. */
-export const FAQPageSchema = () => {
+/**
+ * FAQPage schema. Pass items: [{ question, answer }].
+ * Defaults to brandFaq if no items provided.
+ * Must match visible FAQ content exactly.
+ */
+export const FAQPageSchema = ({ items }) => {
+  const faqItems = items && items.length > 0 ? items : brandFaq;
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    mainEntity: brandFaq.map(({ question, answer }) => ({
+    mainEntity: faqItems.map(({ question, answer }) => ({
       '@type': 'Question',
       name: question,
       acceptedAnswer: {
@@ -155,6 +231,47 @@ export const FAQPageSchema = () => {
         text: answer,
       },
     })),
+  };
+  return (
+    <Helmet>
+      <script type="application/ld+json">{JSON.stringify(schema)}</script>
+    </Helmet>
+  );
+};
+
+/**
+ * AggregateRating + Review schema for testimonials.
+ * Pass reviews: [{ author, reviewBody, ratingValue }] and itemName (the thing being reviewed).
+ */
+export const AggregateRatingSchema = ({ reviews, itemName }) => {
+  if (!reviews || reviews.length === 0) return null;
+  const avgRating = reviews.reduce((sum, r) => sum + (r.ratingValue || 5), 0) / reviews.length;
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": itemName || brandEntity.name,
+    "url": SITE_URL,
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": avgRating.toFixed(1),
+      "reviewCount": reviews.length,
+      "bestRating": "5",
+      "worstRating": "1"
+    },
+    "review": reviews.map((r) => ({
+      "@type": "Review",
+      "author": {
+        "@type": "Person",
+        "name": r.author
+      },
+      "reviewBody": r.reviewBody,
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": r.ratingValue || 5,
+        "bestRating": "5",
+        "worstRating": "1"
+      }
+    }))
   };
   return (
     <Helmet>

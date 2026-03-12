@@ -5,7 +5,7 @@ import { useLocation } from 'react-router-dom';
 const SITE_URL = 'https://apexnexon.tech';
 const DEFAULT_IMAGE = `${SITE_URL}/og-image.png`;
 const DEFAULT_TITLE = 'ApexNexon | AI Automation & Custom Software Development';
-const DEFAULT_DESCRIPTION = 'ApexNexon is a technology and AI solutions company helping businesses automate processes, build custom software, and integrate AI to improve efficiency and productivity.';
+const DEFAULT_DESCRIPTION = 'ApexNexon builds custom AI, OCR, RPA, and ML solutions for enterprises. We digitize operations and deliver measurable ROI. Where Intelligence Meets Automation.';
 
 const PageMeta = ({ title, fullTitle, description, image }) => {
   const location = useLocation();

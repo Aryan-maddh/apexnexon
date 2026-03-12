@@ -228,10 +228,13 @@ const Contact = () => {
                         <Phone size={24} className="text-[#00FFD1]" />
                       </div>
                       <div>
-                        <h3 className="heading-3 mb-2">Phone</h3>
-                        <p className="body-medium text-white/85">
-                          Available on request — we’ll share details when you reach out
-                        </p>
+                        <h3 className="heading-3 mb-2">Phone / WhatsApp</h3>
+                        <a href="tel:+919429914884" className="body-medium text-white/85 hover:text-[#00FFD1] transition-colors block">
+                          +91 94299 14884
+                        </a>
+                        <a href="https://wa.me/919429914884" target="_blank" rel="noopener noreferrer" className="body-small text-[#25D366] hover:underline mt-1 block">
+                          Chat on WhatsApp
+                        </a>
                       </div>
                     </div>
 
@@ -242,8 +245,9 @@ const Contact = () => {
                       <div>
                         <h3 className="heading-3 mb-2">Location</h3>
                         <p className="body-medium text-white/85">
-                          Serving clients globally<br />
-                          <a href="https://apexnexon.tech" target="_blank" rel="noopener noreferrer" className="text-[#00FFD1] hover:underline">apexnexon.tech</a>
+                          Drive-in Road, Memnagar<br />
+                          Ahmedabad, Gujarat – 380052<br />
+                          India
                         </p>
                       </div>
                     </div>
@@ -280,7 +284,7 @@ const Contact = () => {
             <div className="grid md:grid-cols-2 gap-8 max-w-[800px] mx-auto">
               <div className="bg-white/5 backdrop-blur-sm border border-white/10 p-8">
                 <h3 className="heading-2 mb-4 text-[#00FFD1]">Monday - Friday</h3>
-                <p className="body-large text-white/85">9:00 AM - 6:00 PM PST</p>
+                <p className="body-large text-white/85">9:00 AM - 6:00 PM IST</p>
               </div>
               <div className="bg-white/5 backdrop-blur-sm border border-white/10 p-8">
                 <h3 className="heading-2 mb-4 text-[#00FFD1]">Emergency Support</h3>

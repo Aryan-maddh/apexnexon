@@ -9,7 +9,7 @@ import { canonicalSentence } from './brandEntity';
 export const brandFaq = [
   {
     question: 'What does ApexNexon do?',
-    answer: `${canonicalSentence} We design, build, and deploy custom systems for document processing (OCR), robotic process automation (RPA), machine learning models, and integration with ERPs like Odoo. We serve healthcare, finance, logistics, e-commerce, and education.`,
+    answer: `${canonicalSentence} We design, build, and deploy custom systems for document processing (OCR), robotic process automation (RPA), Odoo ERP implementation and customization, Zoho implementation and integration, machine learning models, and web and mobile development. We serve healthcare, finance, logistics, e-commerce, and education.`,
   },
   {
     question: 'Who should use ApexNexon?',

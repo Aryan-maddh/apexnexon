@@ -56,7 +56,7 @@ function getServiceDetail(service) {
   return { longDescription, benefits, outcomes, approach };
 }
 
-import { ServiceSchema, BreadcrumbListSchema } from '../components/SEO/SchemaOrg';
+import { ServiceSchema, BreadcrumbListSchema, HowToSchema, FAQPageSchema } from '../components/SEO/SchemaOrg';
 import PageMeta from '../components/SEO/PageMeta';
 
 const SITE_URL = 'https://apexnexon.tech';
@@ -115,6 +115,27 @@ const ServiceDetail = () => {
         url={canonicalServiceUrl}
       />
       <BreadcrumbListSchema items={breadcrumbItems} />
+      <HowToSchema
+        name={`How ${service.title} works at ApexNexon`}
+        description={`Step-by-step process for delivering ${service.title} — from discovery to optimization.`}
+        steps={approach}
+      />
+      <FAQPageSchema
+        items={[
+          {
+            question: `What is ${service.title}?`,
+            answer: service.longDescription || `${service.description} ApexNexon designs, builds, and deploys these solutions for mid-market and enterprise clients so they can digitize operations and achieve measurable ROI.`
+          },
+          {
+            question: `How does ${service.title} work?`,
+            answer: `We work with you from discovery through deployment: we define requirements and success metrics, design and build the solution, integrate with your existing systems, and provide ongoing support. Typical time to first value is 8–12 weeks with 3–5x ROI in the first year.`
+          },
+          {
+            question: `Who needs ${service.title}?`,
+            answer: `Mid-market and enterprise organizations that need custom solutions rather than off-the-shelf tools—especially in document-heavy or compliance-sensitive industries such as healthcare, finance, logistics, e-commerce, and education.`
+          }
+        ]}
+      />
       {/* Page-level gradient for depth — not fixed so footer is never covered */}
       <div className="absolute inset-0 pointer-events-none z-0" aria-hidden="true">
         <div className="absolute inset-0 bg-gradient-to-b from-black via-[#08080c] to-black opacity-90" />

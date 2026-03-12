@@ -46,7 +46,7 @@ const Footer = () => {
               Where Intelligence Meets Automation. Building the future of business with AI and intelligent systems. Visit us at apexnexon.tech.
             </p>
             <div className="flex gap-4">
-              <a href="https://www.linkedin.com/company/apexnexon" target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-[#00FFD1] transition-colors" aria-label="LinkedIn">
+              <a href="https://www.linkedin.com/company/apex-nexon/" target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-[#00FFD1] transition-colors" aria-label="LinkedIn">
                 <Linkedin size={20} />
               </a>
               <a href="https://twitter.com/apexnexon" target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-[#00FFD1] transition-colors" aria-label="Twitter">
@@ -68,6 +68,7 @@ const Footer = () => {
               <li><Link to="/case-studies" className="footer-link inline-block py-0.5">Case Studies</Link></li>
               <li><Link to="/about" className="footer-link inline-block py-0.5">About Us</Link></li>
               <li><Link to="/faq" className="footer-link inline-block py-0.5">FAQ</Link></li>
+              <li><Link to="/careers" className="footer-link inline-block py-0.5">Careers</Link></li>
             </ul>
           </div>
 
@@ -98,11 +99,11 @@ const Footer = () => {
               </li>
               <li className="flex items-start gap-3">
                 <Phone size={20} className="text-[#00FFD1] mt-1 flex-shrink-0" />
-                <span className="body-muted">Available on request</span>
+                <a href="tel:+919429914884" className="footer-link">+91 94299 14884</a>
               </li>
               <li className="flex items-start gap-3">
                 <MapPin size={20} className="text-[#00FFD1] mt-1 flex-shrink-0" />
-                <span className="body-muted">Serving clients globally • apexnexon.tech</span>
+                <span className="body-muted">Drive-in Road, Memnagar<br />Ahmedabad, Gujarat – 380052</span>
               </li>
             </ul>
           </div>

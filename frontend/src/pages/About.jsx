@@ -54,7 +54,7 @@ const About = () => {
         <div className="max-w-[1400px] mx-auto px-[7.6923%]">
           <h2 className="display-medium mb-6">What ApexNexon Does</h2>
           <p className="body-large text-white/85 mb-6 max-w-[800px]">
-            We design, build, and deploy custom systems in three areas:
+            We design, build, and deploy custom systems across four areas:
           </p>
           <ul className="space-y-3 max-w-[800px]">
             {brandEntity.supportingTopics.map((topic, i) => (
@@ -87,7 +87,7 @@ const About = () => {
           <ul className="space-y-2 max-w-[800px]">
             <li className="body-medium text-white/85">A SaaS product company—we build custom solutions you own.</li>
             <li className="body-medium text-white/85">An advisory-only consultancy—we design, build, and deploy.</li>
-            <li className="body-medium text-white/85">A generic development shop—we specialize in AI, OCR, RPA, and process automation.</li>
+            <li className="body-medium text-white/85">A generic development shop—we specialize in AI, OCR, RPA, Odoo ERP, Zoho, and custom software development.</li>
           </ul>
         </div>
       </section>
